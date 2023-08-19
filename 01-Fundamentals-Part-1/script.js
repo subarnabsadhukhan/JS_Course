@@ -1,24 +1,27 @@
-let javascriptIsFun = true;
-console.log(javascriptIsFun);
+/////// We use the let keyword to declare variables that can change later so basically during the execution.
 
-// typeof :The typeof operator returns a string indicating the type of the operand's value.
-console.log(typeof true); // boolean
-console.log(typeof javascriptIsFun); // boolean
-console.log(typeof 22); // number
-console.log(typeof "Subarnab"); // string
+let age = 30;
+console.log(age);
+age = 31;
 
-// dynamic typing
-javascriptIsFun = "YES!";
-console.log(typeof javascriptIsFun); // string
+let year; // use let when defining an empty variable
 
-// undefined type
-let year;
-console.log(year); // undefined (value of empty variable is undefined)
-console.log(typeof year); // undefined
+///////// Immutable Variable
+const birthday = 2002; // we use the const keyword to declare variables that are not supposed to change at any point in the future.
+/*
+birthday = 2003; // Uncaught TypeError: Assignment to constant variable.
+*/
+/*
+const job; // SyntaxError: 'const' declarations must be initialized.
+*/
 
-year = 2002;
-console.log(typeof year); // number
+///// Var (Legacy Keyword)
+// Var keyword should actually completely be avoided.
+var fruit = "mango";
+console.log(fruit);
+fruit = "Lemon";
+console.log(fruit);
 
-//null data type
-console.log(null); // null
-console.log(typeof null); // object
+// We actually don't even have to declare variables at all because it's actually not mandatory.
+flower = "Rose";
+console.log(flower);
