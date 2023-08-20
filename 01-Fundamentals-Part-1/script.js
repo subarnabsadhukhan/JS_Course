@@ -1,40 +1,25 @@
-/////////////////////////////////////////////
-////////////// Strings and Template Literals
+/////////////////////////////////////////////////
+//////////Taking Decisions: if / else Statements
 
-const firstName = "Ishita";
-const job = "nursing";
-const birthYear = 2002;
-const currentYear = 2023;
+/////// Driving License Eligibility
+const age = 23;
+const isOldEnough = age >= 18;
 
-const ishita =
-  "I'm " +
-  firstName +
-  ", I am " +
-  (currentYear - birthYear) +
-  " years old. I am studying " +
-  job +
-  " now."; // This way is painful!!
-
-// JS can simply convert the number [(currentYear - birthYear)] to a string to join with other strings.
-
-console.log(ishita);
-
-////////////// Template Literals
-
-const ishitaNew = `I'm ${firstName}, I am ${
-  currentYear - birthYear
-} years old. I am studying ${job} now. `; // using template literals
-
-console.log(ishitaNew);
-
-console.log(`Just a regular string in Template String.`);
-
-///////// Multi-line Strings with Template Strings
-
-//Normal Way
-console.log("first line \nsecond line \nthird line");
-
-//With Template Strings
-console.log(`first line
-second line
-third line`);
+// Control Structure - Official Name
+if (isOldEnough) {
+  console.log("Eligible for Driving License 🚗");
+} else {
+  const yearsLeft = 18 - age;
+  console.log(
+    `Not Eligible for Driving License ❌. Wait for ${yearsLeft} year(s).`
+  );
+}
+/////////////////// Alternate Way ////////////////////
+let isEligible;
+if (age >= 18) {
+  isEligible = "Yes! Eligible 🚗";
+} else {
+  isEligible = "Not Eligible ❌";
+}
+console.log(isEligible);
+console.log(typeof isEligible);
