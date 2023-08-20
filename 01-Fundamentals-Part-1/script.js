@@ -1,27 +1,33 @@
-/////// We use the let keyword to declare variables that can change later so basically during the execution.
+///// BASIC OPERATORS
 
-let age = 30;
-console.log(age);
-age = 31;
+/// MATHEMATICAL OPERATORS
+const difference = 25 - 20;
+const addition = 20 + 2;
+console.log(difference, addition); //5 22
+console.log(addition * 10, addition / 10); //220  2.2
 
-let year; // use let when defining an empty variable
+// We can use Plus (+) Operators to Join/Concatenate multiple Strings.
+const firstName = "Subarnab";
+const lastName = "Sadhukhan";
+console.log(firstName + " " + lastName); //Subarnab Sadhukhan
 
-///////// Immutable Variable
-const birthday = 2002; // we use the const keyword to declare variables that are not supposed to change at any point in the future.
-/*
-birthday = 2003; // Uncaught TypeError: Assignment to constant variable.
-*/
-/*
-const job; // SyntaxError: 'const' declarations must be initialized.
-*/
+/// typeof operator
+console.log(typeof lastName); //string
 
-///// Var (Legacy Keyword)
-// Var keyword should actually completely be avoided.
-var fruit = "mango";
-console.log(fruit);
-fruit = "Lemon";
-console.log(fruit);
+/// ASSIGNMENT (=) OPERATORS
+let x = 10 + 5;
+x += 4; // x = x + 4
+console.log(x); //19
 
-// We actually don't even have to declare variables at all because it's actually not mandatory.
-flower = "Rose";
-console.log(flower);
+y = 5;
+y *= 2; // y = y * 2
+console.log(y); //10
+
+x++; // x = x + 1
+x--; //x = x - 1;
+x--; //x = x - 1;
+console.log(x); //18
+
+/// COMPARISON OPERATORS (> , < , >= , <=)
+console.log(x > y); //true
+console.log(y >= 20); //false
