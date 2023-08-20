@@ -1,56 +1,66 @@
-////////////////// Truthy and Falsy Values ///////////////
+/////////////////////////////////////////////////
+////////// EQUALITY OPERATORS: == vs. ===
 
-//---------------------------------------
+let age = 18;
 
-/*
-💡 falsy values are values that are not exactly false, but will become false when we try to convert them into a boolean.
-
-💡 5 falsy values are: 0, "", undefined, null, NaN
-💡 all of these five values will be converted to false when we attempt to convert them to a boolean.
-*/
-
-//---------------------------------------
-
-/*
-💡 any number that is not zero or any string that is not an empty string will be converted to true when we attempt to convert them to a boolean.
-*/
-
-//-----------------------------------------
-// Examples:
-console.log(Boolean(0)); //false
-console.log(Boolean(null)); //false
-console.log(Boolean("Ishita")); //true
-console.log(Boolean(" ")); //true (not an empty string)
-console.log(Boolean("")); //false
-console.log(Boolean({})); //true
-console.log(Boolean(55)); //true
-
-//-----------------------------------------
-// Use Case:
-
-const money = 0;
-if (money) {
-  console.log("Dont't spend it all");
-} else {
-  console.log("You should get a Job!");
+// Strict Equality Operator (===): Does not perform type coertion
+if (age === 18) {
+  console.log(`You just became an Adult :D`); //console prints
 }
-//console print: You should get a Job!
-// as 0 is falsy when converted to Boolean, else statement triggered.
 
-//------------------------------------------
-// Another Use Case:
+// Loose Equality Operator (===): Does perform type coertion
+if (age == 18) {
+  console.log(`You just became an Adult :)`); //console prints
+} // Same type. So, No type coertion needed.
 
-let height;
-if (height) {
-  console.log("YAY! Height is defined!");
-} else {
-  console.log(`Height is UNDEFINED`); //console prints
+//---------------------------------------------
+
+const birthYear = "2018";
+
+// Strict Equality Operator (===): Does not perform type coertion
+if (birthYear === 2018) {
+  console.log(`You are not an Adult`); //No Execution
 }
-// as height is not assigned any value or undefined, else statement will be triggered.
 
-let weight = "50kg";
-if (weight) {
-  console.log("YAY! weight is defined!"); //console prints
+// Loose Equality Operator (===): Does perform type coertion
+if (birthYear == 2018) {
+  console.log(`You are not an Adult :(`); //console prints
+} // Type Coertion Performed.
+
+//---------------------------------------------
+
+// Example:
+console.log(18 == 18); //true
+console.log("18" == 18); //true
+console.log("18" === 18); //false
+console.log("18" === "18"); //true
+
+//-----------------------------------------------
+
+const favourite = prompt(`What's your favourite number?`);
+console.log(favourite);
+console.log(typeof favourite); //string
+
+//---------------------------------------------
+/////// More conditions with else if:
+const lottery = Number(prompt(`Choose a number:`));
+if (lottery === 22) {
+  console.log(`You have won the Jackpot :D`);
+} else if (lottery === 56) {
+  console.log(`You have won the 2nd Prize :)`);
+} else if (lottery === 99) {
+  console.log(`You have won the 3rd Prize :)`);
 } else {
-  console.log(`weight is UNDEFINED`);
+  console.log(`You have lost the Game :(`);
 }
+
+//////////////////////////////////////////////
+//////// Different Operator
+
+// Loose Different Opertor
+console.log(18 != 18); //false
+console.log("18" != 18); //false
+
+// Strict Different Operator
+console.log("18" !== 18); //true
+console.log("18" !== "18"); //false
