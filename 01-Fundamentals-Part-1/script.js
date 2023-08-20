@@ -1,31 +1,46 @@
-//////////////////////////////////////////
-////////////////// Boolean Logic
+///////////////////////////////////////////////
+/////////// The Switch Statement
 
-let hasDriversLicense = true;
-let hasGoodVision = true;
+const day = "thrusday";
 
-// AND Operator (&&) and OR Operator (||)
+switch (day) {
+  case "monday": // day === 'monday'
+    console.log(`Plan Course Structure`);
+    console.log(`Go to Coding Meetup`);
+    break;
+  case "tuesday":
+    console.log(`Prepare Theory Lectures`);
+    break;
+  case "wednesday":
+  case "thrusday":
+    console.log(`Write Code Examples`);
+    break;
+  case "friday":
+    console.log(`Record Videos`);
+    break;
+  case "saturday":
+  case "sunday":
+    console.log(`Enjoy the Weekend :D`);
+    break;
+  default:
+    console.log(`Not a Valid Day!`);
+}
 
-console.log(hasDriversLicense && hasGoodVision); //true
-console.log(hasDriversLicense || hasGoodVision); //true
+//💡 In Switch Statements, Comparison happens in **Strict Equality** mode.
 
-hasGoodVision = false;
+//------------ Alternate Way ---------------
 
-console.log(hasDriversLicense && hasGoodVision); //false
-console.log(hasDriversLicense || hasGoodVision); //true
-
-console.log(!hasDriversLicense); //false
-console.log(!hasGoodVision); //true
-
-//------------------------------------------------
-//Example:
-
-hasDriversLicense = true;
-hasGoodVision = true;
-let isTired = true;
-
-if (hasDriversLicense && hasGoodVision && !isTired) {
-  console.log("You should drive");
+if (day === "monday") {
+  console.log(`Plan Course Structure`);
+  console.log(`Go to Coding Meetup`);
+} else if (day === "tuesday") {
+  console.log(`Prepare Theory Lectures`);
+} else if (day === "wednesday" || day === "thrusday") {
+  console.log(`Write Code Examples`);
+} else if (day === "friday") {
+  console.log(`Record Videos`);
+} else if (day === "saturday" || day === "sunday") {
+  console.log(`Enjoy the Weekend :D`);
 } else {
-  console.log("You should not drive"); // console prints
+  console.log(`Not a Valid Day!`);
 }
