@@ -1,46 +1,29 @@
-///////////////////////////////////////////////
-/////////// The Switch Statement
+//////////////////////////////////////////////
+/////// Statements and Expressions
 
-const day = "thrusday";
+/*
 
-switch (day) {
-  case "monday": // day === 'monday'
-    console.log(`Plan Course Structure`);
-    console.log(`Go to Coding Meetup`);
-    break;
-  case "tuesday":
-    console.log(`Prepare Theory Lectures`);
-    break;
-  case "wednesday":
-  case "thrusday":
-    console.log(`Write Code Examples`);
-    break;
-  case "friday":
-    console.log(`Record Videos`);
-    break;
-  case "saturday":
-  case "sunday":
-    console.log(`Enjoy the Weekend :D`);
-    break;
-  default:
-    console.log(`Not a Valid Day!`);
-}
+💡 Essentially, an expression is a piece of code that produces a value.
 
-//💡 In Switch Statements, Comparison happens in **Strict Equality** mode.
+💡 expressions produce values, and that statements are like full sentences that translate our actions.
 
-//------------ Alternate Way ---------------
+💡 in a template literal, we can only insert expressions, but not statements.
 
-if (day === "monday") {
-  console.log(`Plan Course Structure`);
-  console.log(`Go to Coding Meetup`);
-} else if (day === "tuesday") {
-  console.log(`Prepare Theory Lectures`);
-} else if (day === "wednesday" || day === "thrusday") {
-  console.log(`Write Code Examples`);
-} else if (day === "friday") {
-  console.log(`Record Videos`);
-} else if (day === "saturday" || day === "sunday") {
-  console.log(`Enjoy the Weekend :D`);
-} else {
-  console.log(`Not a Valid Day!`);
-}
+Link: https://www.joshwcomeau.com/javascript/statements-vs-expressions/
+
+*/
+
+const me = "subarnab"; // here, me is an expression.
+console.log(`I am ${me}. I am ${2023 - 2002} years old.`);
+// template literal only takes expressions.
+
+//------------ Example of Expression -------
+
+2 + 3;
+("happy");
+23;
+("Monday");
+
+//------------ Example of Statement ---------
+
+if (23 > 2) console.log(`Hello!`); // if-else is Statement.
