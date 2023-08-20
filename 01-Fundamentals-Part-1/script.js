@@ -1,29 +1,36 @@
-//////////////////////////////////////////////
-/////// Statements and Expressions
+///////////////////////////////////////////////
+///////// The Conditional (Ternary) Operator
+
+const age = 20;
+
+age >= 18
+  ? console.log("I want to drink Wine 🍷")
+  : console.log("I want to drink Juice 🥤");
+
+//💡 mandatory ELSE block is needed in case of Ternary Operator.
+
+//--------------------------------------------
 
 /*
 
-💡 Essentially, an expression is a piece of code that produces a value.
+💡 An operator always produces a value. So in other words an operator is an expression.
 
-💡 expressions produce values, and that statements are like full sentences that translate our actions.
-
-💡 in a template literal, we can only insert expressions, but not statements.
-
-Link: https://www.joshwcomeau.com/javascript/statements-vs-expressions/
+💡 Because since the ternary operator is really an expression, we can now use it, for example, in a template literal.
 
 */
 
-const me = "subarnab"; // here, me is an expression.
-console.log(`I am ${me}. I am ${2023 - 2002} years old.`);
-// template literal only takes expressions.
+const drink = age >= 18 ? "Wine 🍷" : "Juice 🥤";
+console.log(drink);
 
-//------------ Example of Expression -------
+//-----------------------------------------
+// use ternary operator inside template literal:
 
-2 + 3;
-("happy");
-23;
-("Monday");
+console.log(`I like to drink ${age >= 18 ? "Wine 🍷" : "Juice 🥤"}`);
 
-//------------ Example of Statement ---------
+//------------------ Example -------------------
 
-if (23 > 2) console.log(`Hello!`); // if-else is Statement.
+const bill = 275;
+const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+console.log(
+  `The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`
+);
