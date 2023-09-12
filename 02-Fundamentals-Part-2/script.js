@@ -1,42 +1,20 @@
-////////////////////////////////////////////////
-//////////Function Declarations vs. Expressions
+"use strict";
+///////////////////////////////////////
+//////// Arrow Function
 
-//---------------------------
-// Call Function Before Defining
+//------------- Simple Case ----------------
+///// Arrow Function
+const calcAge3 = (birthYear, currentYear) => currentYear - birthYear;
 
-let age1 = calcAge1(2023, 2020);
+console.log(calcAge3(2001, 2023)); //22
 
-// let age2 = calcAge2(2023, 2020); //Uncaught ReferenceError: Cannot access 'calcAge2' before initialization
-
-//---------------------------------
-///// Function Declarations
-
-function calcAge1(currentYear, birthYear) {
-  return currentYear - birthYear;
-}
-
-console.log(calcAge1(2023, 2002)); //21
-console.log(calcAge1(2023, 1990)); //33
-
-//-----------------------------------
-///// Function Expressions
-
-const calcAge2 = function (currentYear, birthYear) {
-  return currentYear - birthYear;
+//------------ Complex Case --------------------
+const yearsUntilRetirement = (birthYear, currentYear) => {
+  const age = currentYear - birthYear;
+  const retirement = 65 - age; // retirement age is 65
+  return retirement;
 };
 
-console.log(calcAge1(2023, 2002)); //21
-console.log(calcAge1(2023, 1990)); //33
+console.log(yearsUntilRetirement(2002, 2023)); //44
 
-//////////////////////////////////////////////
-/*--------------------------------
-Difference between Function Declarations and Function Expressions
-
-💚 we can actually call function declarations before they are defined in the code.
-
-💚 we can NOT call function expressions before they are defined in the code.
-*/
-console.log(`Function Declaration: age1 = ${age1}`);
-//console: Function Declaration: age1 = 3
-
-console.log(`Function Expression: age2 = ${age2}`);
+// 💚 Disadvantage: Arrow Functions don't get 'this' keyword.
