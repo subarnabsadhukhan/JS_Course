@@ -1,20 +1,17 @@
 "use strict";
-///////////////////////////////////////
-//////// Arrow Function
+////////////////////////////////////////////
+//////// Functions Calling Other Functions
 
-//------------- Simple Case ----------------
-///// Arrow Function
-const calcAge3 = (birthYear, currentYear) => currentYear - birthYear;
-
-console.log(calcAge3(2001, 2023)); //22
-
-//------------ Complex Case --------------------
-const yearsUntilRetirement = (birthYear, currentYear) => {
-  const age = currentYear - birthYear;
-  const retirement = 65 - age; // retirement age is 65
-  return retirement;
+const cutPieces = function (fruit) {
+  return fruit * 4;
 };
 
-console.log(yearsUntilRetirement(2002, 2023)); //44
+const fruitProcessor = function (apples, oranges) {
+  const applePieces = cutPieces(apples);
+  const orangePieces = cutPieces(oranges);
 
-// 💚 Disadvantage: Arrow Functions don't get 'this' keyword.
+  const juice = `Juice with ${applePieces} pieces of apple and ${orangePieces} pieces of orange.`;
+  return juice;
+};
+
+console.log(fruitProcessor(2, 3)); //Juice with 8 pieces of apple and 12 pieces of orange.
