@@ -1,25 +1,42 @@
-"use strict";
+////////////////////////////////////////////////
+//////////Function Declarations vs. Expressions
 
-//////////////////////////////////
-////////////// FUNCTIONS
+//---------------------------
+// Call Function Before Defining
 
-function logger() {
-  console.log("My name is Subarnab");
-}
-//💚 Not all Functions need to return anything or need to accept parameter(s).
+let age1 = calcAge1(2023, 2020);
 
-// calling / running / invoking function
-logger();
-logger();
+// let age2 = calcAge2(2023, 2020); //Uncaught ReferenceError: Cannot access 'calcAge2' before initialization
 
-//----------------- Example --------------
-function fruitProcessor(apples, oranges) {
-  const juice = `Juice with ${apples} apples and ${oranges} oranges.`;
-  return juice;
+//---------------------------------
+///// Function Declarations
+
+function calcAge1(currentYear, birthYear) {
+  return currentYear - birthYear;
 }
 
-console.log(fruitProcessor());
-//Console: Juice with undefined apples and undefined oranges.
+console.log(calcAge1(2023, 2002)); //21
+console.log(calcAge1(2023, 1990)); //33
 
-console.log(fruitProcessor(3, 2));
-//Console: Juice with 3 apples and 2 oranges.
+//-----------------------------------
+///// Function Expressions
+
+const calcAge2 = function (currentYear, birthYear) {
+  return currentYear - birthYear;
+};
+
+console.log(calcAge1(2023, 2002)); //21
+console.log(calcAge1(2023, 1990)); //33
+
+//////////////////////////////////////////////
+/*--------------------------------
+Difference between Function Declarations and Function Expressions
+
+💚 we can actually call function declarations before they are defined in the code.
+
+💚 we can NOT call function expressions before they are defined in the code.
+*/
+console.log(`Function Declaration: age1 = ${age1}`);
+//console: Function Declaration: age1 = 3
+
+console.log(`Function Expression: age2 = ${age2}`);
