@@ -1,17 +1,24 @@
 "use strict";
-////////////////////////////////////////////
-//////// Functions Calling Other Functions
-
-const cutPieces = function (fruit) {
-  return fruit * 4;
+///////////////////////////////////////
+// Reviewing Functions
+const calcAge = function (birthYeah) {
+  return 2037 - birthYeah;
 };
 
-const fruitProcessor = function (apples, oranges) {
-  const applePieces = cutPieces(apples);
-  const orangePieces = cutPieces(oranges);
+const yearsUntilRetirement = function (birthYeah, firstName) {
+  const age = calcAge(birthYeah);
+  const retirement = 65 - age;
 
-  const juice = `Juice with ${applePieces} pieces of apple and ${orangePieces} pieces of orange.`;
-  return juice;
+  if (retirement > 0) {
+    return retirement;
+
+    console.log(`${firstName} retires in ${retirement} years`);
+    //💚 the return statement immediately exits or immediately returns the function. And so therefore there is no chance that this code here is even reached. Move this line above return.
+  } else {
+    console.log(`${firstName} has already retired 🎉`);
+    return -1;
+  }
 };
 
-console.log(fruitProcessor(2, 3)); //Juice with 8 pieces of apple and 12 pieces of orange.
+console.log(yearsUntilRetirement(1991, "Jonas"));
+console.log(yearsUntilRetirement(1950, "Mike"));
