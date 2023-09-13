@@ -1,63 +1,67 @@
 "use strict";
 ////////////////////////////////////////////////
-///////// Dot vs. Bracket Notation
-
-// Object Literal Syntax
+///////// Object Methods
+const currentYear = 2023;
 const Ishita = {
   firstName: "Ishita",
   lastName: "Ghosh",
-  age: 2023 - 2002,
+  birthYear: 2002,
   job: "nursing",
   friends: ["Disha", "Shreya", "Kuheli"],
+  hasDriversLicense: false,
+
+  // Functions can be added as value inside Objects
+  calcAge: function (currentYear) {
+    // Using this keyword
+    return currentYear - this.birthYear;
+  }, // Function Expression, NOT Declaration
 };
 
-console.log(Ishita);
+// Dot Notation
+console.log(`Ishita's age: ${Ishita.calcAge(currentYear)}`); //Ishita's age: 21
 
-//////////////////////////////////////
-//-------- Getting a Property from an Object ----
+//Bracket Notation
+console.log(`Ishita's age: ${Ishita["calcAge"](currentYear)}`); //Ishita's age: 21
+
+//////////////// Alternate Way //////////////////
+const Ishitaa = {
+  firstName: "Ishita",
+  lastName: "Ghosh",
+  birthYear: 2002,
+  job: "nurse",
+  sex: "female",
+  friends: ["Disha", "Shreya", "Kuheli"],
+  hasDriversLicense: false,
+
+  // Functions can be added as value inside Objects
+  calcAge: function (currentYear) {
+    // Using this keyword
+    this.age = currentYear - this.birthYear;
+    return this.age;
+  }, // Function Expression, NOT Declaration
+
+  //----------- for challenge only--------
+  getSummary: function (currentYear) {
+    this.summary = `${this.firstName} is a ${this.calcAge(
+      currentYear
+    )} years old ${this.job}, and ${this.sex === "male" ? "he" : "she"} has ${
+      this.hasDriversLicense ? "a" : "no"
+    } driver's license.`;
+    return this.summary;
+  },
+};
 
 // Dot Notation
-console.log(Ishita.job); //nursing
+console.log(`Ishitaa's age: ${Ishitaa.age}`); //undefined
 
-// Bracket Notation
-console.log(Ishita["job"]); //nursing
+//💚 I need to call calcAge() atleast 1 first to create the age property.
+console.log(`Ishitaa's age: ${Ishitaa.calcAge(currentYear)}`); //Ishita's age: 21
 
-// ---- use Cases of Bracket Notation -------------
-/* 
+console.log(`Ishitaa's age: ${Ishitaa.age}`); //Ishita's age: 21
 
-💚 in bracket notation, we can actually put any expression that we'd like, so we don't have to explicitly write the string here, but instead we can compute it from some operation because remember that an operation is basically an expression.
+//Bracket Notation
+console.log(`Ishitaa's age: ${Ishitaa["age"]}`); //Ishita's age: 21
 
-// Case 1 ----------------
-*/
-const nameKey = "Name";
-console.log(Ishita[`first` + nameKey]); //Ishita
-console.log(Ishita[`last` + nameKey]); //Ghosh
-
-// Case 2 -----------------
-
-const interestedIn = prompt(
-  "What do you want to know about Ishita? Choose between firstName, lastName, age, job, and friends"
-);
-
-if (Ishita[interestedIn]) {
-  console.log(Ishita[interestedIn]);
-} else {
-  console.log(
-    `Wrong Request! Choose between firstName, lastName, age, job, and friends`
-  );
-}
-
-//////////////////////////////////////////////
-/////// Add Properties to an Object
-
-Ishita.location = "Kolkata";
-Ishita["sex"] = "Female";
-
-console.log(Ishita);
-
-// --------- Challenge ----------
-console.log(
-  `${Ishita.firstName} has ${Ishita.friends.length} friends, and ${
-    Ishita.sex === "Female" ? "her" : "his"
-  } best friend is called ${Ishita.friends[0]}.`
-); //Ishita has 3 friends, and her best friend is called Disha.
+//////////////////////////////////////////
+// ---------- Challange -----------------
+console.log(Ishitaa.getSummary(currentYear));
