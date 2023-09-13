@@ -1,59 +1,75 @@
 "use strict";
 ////////////////////////////////////////////////
-///////// Introduction to Arrays
-
-//---------- Literal Syntax ------------
-const girls = ["Ishita", "Disha", "Shreya"];
-
-console.log(girls); //['Ishita', 'Disha', 'Shreya']
-
-//------ Alternate Way of creating Array ---------
-const years = new Array(1991, 2000, 2002, 2012, 2020);
-
-console.log(years); //[1991, 2000, 2002, 2012, 2020]
-
-////////////////////////////////////////
-//----------------------------
-console.log(`I Love ${girls[0]} 💖`); //I Love Ishita 💖
-
-//---------- Properties of Array -------------
-
-////// Actual numbers of elements in the array
-console.log(girls.length); //3
-
-// ------ Log last element of an array ----------
-console.log(girls[girls.length - 1]); //Shreya
-console.log(girls[-1]); //undefined😢
-
-// ------ add and replace elements -----------
-girls[1] = "Sneha";
-console.log(girls); //['Ishita', 'Sneha', 'Shreya']
-
-girls[3] = "Bipasha";
-console.log(girls); //['Ishita', 'Sneha', 'Shreya', 'Bipasha']
-
-girls[8] = "Samiha";
-console.log(girls); //['Ishita', 'Sneha', 'Shreya', 'Bipasha', empty × 4, 'Samiha']
-console.log(girls.length); //9
-
-//-----------------------
+///////// Basic Array Operations (Methods)
 
 /*
 
-💚 we can actually mutate Arrays even though they were declared with const.
-
-💚 Now what we can not do is to actually replace the entire Array.
+💚 JavaScript has some built in functions that we can basically apply directly on arrays. And these are called methods and we can think of methods as array operations basically.
 
 */
+const friends = ["Michael", "Steven", "Peter"];
 
-// girls = ["Ankita", "Jyosmita", "Suvangi"];
-// // Uncaught TypeError: Assignment to constant variable.
+//////////////////////////////////////////
+/////// ADD ELEMENTS
 
-/// ----------------------------------
-// Arrays can actually hold values of different types at the same time.
+// --------- .push() --------
+// add element at the end of an array
+const newLength = friends.push("Jay");
 
-const firstName = "Ishita";
-const hobby = ["dancing", "drawing", "listening"];
-const Ishita = [firstName, "Ghosh", 2023 - 2002, "student", hobby];
+console.log(friends); //['Michael', 'Steven', 'Peter', 'Jay']
+console.log(newLength); //4
 
-console.log(Ishita);
+// ---------- .unshift() -------
+// add elements to the beginning of the array
+friends.unshift("John");
+
+console.log(friends); //['John', 'Michael', 'Steven', 'Peter', 'Jay']
+
+/////////////////////////////////////////
+/////// REMOVE ELEMENTS
+
+// ------------- .pop() ------
+// removes the last element of the array
+const popped = friends.pop();
+console.log(friends); //['John', 'Michael', 'Steven', 'Peter']
+
+// .pop() method returns removed element
+console.log(popped); //Jay
+
+// ----------- .shift() ------------
+// removes the first element of an array
+const shifted = friends.shift();
+
+console.log(friends); //['Michael', 'Steven', 'Peter']
+
+// this method also returns the removed element
+console.log(shifted); //John
+
+//////////////////////////////////////////////
+
+//-------- .indexOf() ----------------
+// this tells which position a certain element is in the array.
+
+console.log(friends.indexOf("Steven")); //1
+console.log(friends.indexOf("Subarnab")); //-1
+
+// --------- .includes() ----------
+// instead of returning the index of the element, includes will simply return true if the element is in the array and false if it's not.
+
+console.log(friends.includes("Steven")); //true
+console.log(friends.includes("Subarnab")); //false
+
+////// checking happens in strict equality ///////
+friends.push(23);
+console.log(friends); //['Michael', 'Steven', 'Peter', 23]
+
+console.log(friends.indexOf("23")); //-1
+console.log(friends.indexOf(23)); //3
+
+console.log(friends.includes("23")); //false
+console.log(friends.includes(23)); //true
+
+// use case of .includes() method
+if (friends.includes("Steven")) {
+  console.log("You have a friend called Steven."); //console prints
+}
