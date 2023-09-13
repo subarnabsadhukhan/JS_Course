@@ -1,26 +1,30 @@
 "use strict";
 /////////////////////////////////////////////
-///// Looping Backwards and Loops in Loops
+///// The while Loop
 
-const ishitaArray = [
-  "Ishita",
-  "Ghosh",
-  2023 - 2002,
-  "nurse",
-  ["Disha", "Sneha", "Shreya"],
-];
-
-//------ Looping Backwards ------------
-
-for (let i = ishitaArray.length - 1; i >= 0; i--) {
-  console.log(ishitaArray[i]);
+// for loop
+console.log(`--- USING FOR LOOP ---`);
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♀️`);
 }
 
-//---- Loop inside of a Loop -----
-for (let exercise = 1; exercise < 4; exercise++) {
-  console.log(`-------- Starting exercise ${exercise}`);
-
-  for (let rep = 1; rep < 6; rep++) {
-    console.log(`Exercise ${exercise}: Lifting weight repetition ${rep} 🏋️‍♀️`);
-  }
+// while loop
+console.log(`--- USING WHILE LOOP ---`);
+let rep = 1;
+while (rep <= 10) {
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♀️`);
+  rep++;
 }
+
+// -----------------------------------
+// roll a dice and then keep rolling the dice until we roll a six. And then when we roll a six, we stop.
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while (dice !== 6) {
+  console.log(`You rolled a ${dice}`);
+  dice = Math.trunc(Math.random() * 6) + 1;
+  if (dice === 6) console.log("Loop is about to end...");
+}
+
+//💚 while loop does really not have to depend on any counter variable. So whenever you do need a loop without a counter, you can reach for the while loop.
