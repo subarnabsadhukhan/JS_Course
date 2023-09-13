@@ -1,67 +1,71 @@
 "use strict";
 ////////////////////////////////////////////////
-///////// Object Methods
-const currentYear = 2023;
-const Ishita = {
-  firstName: "Ishita",
-  lastName: "Ghosh",
-  birthYear: 2002,
-  job: "nursing",
-  friends: ["Disha", "Shreya", "Kuheli"],
-  hasDriversLicense: false,
+///////// Iteration: The for Loop
 
-  // Functions can be added as value inside Objects
-  calcAge: function (currentYear) {
-    // Using this keyword
-    return currentYear - this.birthYear;
-  }, // Function Expression, NOT Declaration
-};
+//💚 for loop keeps running while condition is TRUE
 
-// Dot Notation
-console.log(`Ishita's age: ${Ishita.calcAge(currentYear)}`); //Ishita's age: 21
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep} 🏋🏻‍♂️`);
+}
 
-//Bracket Notation
-console.log(`Ishita's age: ${Ishita["calcAge"](currentYear)}`); //Ishita's age: 21
+////////////////////////////////////////////////
+/////// Looping Arrays, Breaking and Continuing
 
-//////////////// Alternate Way //////////////////
-const Ishitaa = {
-  firstName: "Ishita",
-  lastName: "Ghosh",
-  birthYear: 2002,
-  job: "nurse",
-  sex: "female",
-  friends: ["Disha", "Shreya", "Kuheli"],
-  hasDriversLicense: false,
+const ishitaArray = [
+  "Ishita",
+  "Ghosh",
+  2023 - 2002,
+  "nurse",
+  ["Disha", "Sneha", "Shreya"],
+  true,
+];
 
-  // Functions can be added as value inside Objects
-  calcAge: function (currentYear) {
-    // Using this keyword
-    this.age = currentYear - this.birthYear;
-    return this.age;
-  }, // Function Expression, NOT Declaration
+const types = [];
 
-  //----------- for challenge only--------
-  getSummary: function (currentYear) {
-    this.summary = `${this.firstName} is a ${this.calcAge(
-      currentYear
-    )} years old ${this.job}, and ${this.sex === "male" ? "he" : "she"} has ${
-      this.hasDriversLicense ? "a" : "no"
-    } driver's license.`;
-    return this.summary;
-  },
-};
+for (let i = 0; i <= ishitaArray.length - 1; i++) {
+  // ----- reading an array using for loop ----
+  console.log(ishitaArray[i], typeof ishitaArray[i]);
 
-// Dot Notation
-console.log(`Ishitaa's age: ${Ishitaa.age}`); //undefined
+  // ----- filling array using for loop ----
+  types[i] = typeof ishitaArray[i];
+}
 
-//💚 I need to call calcAge() atleast 1 first to create the age property.
-console.log(`Ishitaa's age: ${Ishitaa.calcAge(currentYear)}`); //Ishita's age: 21
+console.log(types); //['string', 'string', 'number', 'string', 'object', 'boolean']
 
-console.log(`Ishitaa's age: ${Ishitaa.age}`); //Ishita's age: 21
+///--------------------------
 
-//Bracket Notation
-console.log(`Ishitaa's age: ${Ishitaa["age"]}`); //Ishita's age: 21
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
 
-//////////////////////////////////////////
-// ---------- Challange -----------------
-console.log(Ishitaa.getSummary(currentYear));
+for (let i = 0; i < years.length; i++) {
+  ages.push(2023 - years[i]);
+}
+
+console.log(ages); //[32, 16, 54, 3]
+
+////////////////////////////////////////////
+//------- continue & break -------------
+
+/*
+
+💚 continue is to exit the current iteration of the loop and continue to the next one.
+
+💚 On the other hand, break is used to completely terminate the whole loop.
+
+*/
+
+//------- log only strings --------------
+console.log(`--- LOG ONLY STRINGS ---`);
+
+for (let i = 0; i <= ishitaArray.length - 1; i++) {
+  if (typeof ishitaArray[i] !== "string") continue;
+
+  console.log(ishitaArray[i], typeof ishitaArray[i]);
+}
+
+//--- log no other elements after we found a number ---
+for (let i = 0; i <= ishitaArray.length - 1; i++) {
+  if (typeof ishitaArray[i] === "number") break;
+
+  console.log(ishitaArray[i], typeof ishitaArray[i]);
+}
