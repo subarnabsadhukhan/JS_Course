@@ -38,3 +38,30 @@
 - use `.style` after selecting elements.
 - for CSS styles with more than 1 word (ex. `background-color`), use camelCase version in JS.
 - write property values inside `" "`.
+
+## PROJECT #2: Modal Window
+
+### Limitations of `querySelector()` method
+
+Whenever we use query selector with a selector, which actually matches multiple elements, only the first one will get selected.
+
+**To Select all the matching elements use `querySelectorAll()`**
+
+### To add or remove class(es) to a HTML Element
+
+- First Select the HTML Element using a `querySelector()`
+
+        const modal = document.querySelector(".modal");
+
+-       modal.classList.remove("hidden");
+        modal.classList.add("hidden");
+
+### Handling an "Esc" Keypress Event
+
+> keyboard events are so-called **global events**. Because they do not happen on one specific element. For global events like keyboard events we usually listen on the whole document.
+>
+> There are actually 3 types of events for the keyboard. There is the **keydown**, **keypress**, and **keyup**.
+>
+> 1. **keyup**, which only happens when we lift up finger off the key.
+> 2. **keypress** is fired continuously as we keep our finger on a certain key.
+> 3. **keydown** is fired as soon as we just press down the key.
