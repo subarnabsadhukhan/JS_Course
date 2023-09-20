@@ -1,5 +1,4 @@
 "use strict";
-
 ///////////////////////////////////////////
 ////// PROJECT #2: Modal Window //////////
 
@@ -14,22 +13,9 @@ const closeModal = function () {
 };
 
 const showModal = function () {
-  // console.log(btnsShowModal[i].textContent);
-
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
-
-  /*
-  // ALternate Way
-  modal.style.display = "block";
-  */
 };
-/*
-console.log(btnsShowModal);
-
-for (let i = 0; i < btnsShowModal.length; i++)
-console.log(btnsShowModal[i].textContent);
-*/
 
 for (let i = 0; i < btnsShowModal.length; i++) {
   btnsShowModal[i].addEventListener("click", showModal);
@@ -38,13 +24,8 @@ for (let i = 0; i < btnsShowModal.length; i++) {
 btnCloseModal.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
+// Close the Modal by pressing ESC keydown
 document.addEventListener("keydown", function (e) {
-  /*
-  console.log(`A Key is Pressed!`);
-  console.log(e);
-  console.log(e.key);
-  console.log(typeof e.key);
-  */
   if (e.key === "Escape" && !modal.classList.contains("hidden")) {
     closeModal();
   }
