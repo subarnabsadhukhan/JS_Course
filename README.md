@@ -65,3 +65,7 @@ Whenever we use query selector with a selector, which actually matches multiple 
 > 1. **keyup**, which only happens when we lift up finger off the key.
 > 2. **keypress** is fired continuously as we keep our finger on a certain key.
 > 3. **keydown** is fired as soon as we just press down the key.
+
+## PROJECT #3: Pig Game
+
+![image](readme-assets/pig-game-flowchart.jpg)
