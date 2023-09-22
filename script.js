@@ -53,31 +53,11 @@ btnRoll.addEventListener("click", function () {
       // switch to next player
       switchPlayer();
     }
-
-    /*
-    if (player0El.classList.contains("player--active")) {
-      console.log(`true`);
-      player0El.classList.remove("player--active");
-      player1El.classList.add("player--active");
-    } else {
-      player1El.classList.remove("player--active");
-      player0El.classList.add("player--active");
-    }
-    */
   }
 });
 
 btnHold.addEventListener("click", function () {
   if (isPlaying) {
-    /*
-    activePlayer === 0
-    ? (scores[0] += currentScore)
-    : (scores[1] += currentScore);
-    
-    score0El.textContent = scores[0];
-    score1El.textContent = scores[1];
-    */
-
     // Add current score to active player score
     scores[activePlayer] += currentScore;
     document.getElementById(`score--${activePlayer}`).textContent =
