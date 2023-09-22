@@ -69,3 +69,13 @@ Whenever we use query selector with a selector, which actually matches multiple 
 ## PROJECT #3: Pig Game
 
 ![image](readme-assets/pig-game-flowchart.jpg)
+
+### How to Select Elements by ID
+
+    const score0El = document.querySelector("#score--0");
+    const score1El = document.getElementById("score--1");
+
+> The `toggle()` method of the DOMTokenList interface removes an existing token from the list and if the token doesn't exist, it's added.
+>
+>     player0El.classList.toggle("player--active");
+>     player1El.classList.toggle("player--active");
