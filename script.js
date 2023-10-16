@@ -1,50 +1,55 @@
-//////////////////////////////////
-//// Scoping in Practice
+////////////////////////////////////
+//// Hoisting and TDZ in Practice
 
+//////////////////////////////////////
+/////////////////////////////////////
+// Variable Hoisting
 "use strict";
+console.log(me); //undefined
+var me = "Jonas";
 
-function calcAge(birthYear) {
-  const age = 2037 - birthYear;
+///////////////////////
+// console.log(job); //Uncaught ReferenceError: Cannot access 'job' before initialization
+let job = "teacher";
 
-  function printAge() {
-    let output = `${firstName}, you are ${age}, born in ${birthYear}`;
-    console.log(output); // firstName and birthYear is coming from Outer Scope.
+//////////////////////
+// console.log(year); //Uncaught ReferenceError: Cannot access 'year' before initialization
+const year = 1991;
 
-    if (birthYear >= 1981 && birthYear <= 1996) {
-      var millenial = true; // var is function scoped.
+//////////////////////////////////
+//////////////////////////////////
 
-      // Creating NEW variable with same name as outer scope's variable
-      const firstName = "Steven"; // const is block scoped.
+// Function Hoisting
+("use strict");
 
-      // Reasssigning outer scope's variable
-      output = "NEW OUTPUT!";
-      //*** const output = "NEW OUTPUT!";
+// For Function Decleration
+console.log(addDecl(2, 3)); //5
 
-      const str = `Oh, and you're a millenial, ${firstName}`; // const is block scoped.
-
-      // firstName is available in current scope, so 'Steven' will be used instead of 'Jonas' from Parent (Global) Scope.
-      console.log(str);
-
-      function add(a, b) {
-        return a + b;
-      }
-    }
-    // console.log(str); //Uncaught ReferenceError: str is not defined (as str is block scoped)
-
-    console.log(millenial); //true (millenial is function scoped)
-
-    // console.log(add(2, 3)); //functions are block scoped, only in strict mode
-
-    console.log(output); //reassigned output variable is logged.
-  }
-  printAge();
-
-  return age;
+function addDecl(a, b) {
+  return a + b;
 }
 
-const firstName = "Jonas";
-calcAge(1991);
+//==================================
 
-// console.log(age); //Uncaught ReferenceError: age is not defined
+// For Function Expression (const keyword used)
+// console.log(addExpr(2, 3)); //Uncaught ReferenceError: Cannot access 'addExpr' before initialization
 
-// printAge(); // functions are not available in outer scope
+const addExpr = function (a, b) {
+  return a + b;
+};
+
+//==================================
+// For Function Expression (var keyword used)
+console.log(addExprs); //undefined
+// console.log(addExprs(2, 3)); //Uncaught TypeError: addExpr is not a function
+
+var addExprs = function (a, b) {
+  return a + b;
+};
+
+//====================================
+// For Arrow Function (var keyword used)
+console.log(addArrow); //undefined
+// console.log(addArrow(2, 3)); //Uncaught TypeError: addArrow is not a function
+
+var addArrow = (a, b) => a + b;
