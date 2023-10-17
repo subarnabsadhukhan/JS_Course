@@ -1,25 +1,28 @@
 "use strict";
 
 ////////////////////////////////
-//// The Spread Operator ( … )
+//// Pasta Resturant
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
 
-// Use case on String
-const str = "Subarnab";
-const letters = [...str];
+  orderPasta(ing1, ing2, ing3) {
+    console.log(
+      `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+};
+const ingredients = [
+  prompt(`Let's Make Pasta! Ingredient 1?`),
+  prompt(`Ingredient 2?`),
+  prompt(`Ingredient 3?`),
+];
+console.log(ingredients); //['mushrooms', 'aspargus', 'cheese']
 
-console.log(letters);
-/*
-CONSOLE:
-[
-  'S', 'u', 'b',
-  'a', 'r', 'n',
-  'a', 'b'
-] 
-*/
+// Older Way
+restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+//CONSOLE: Here is your declicious pasta with mushrooms, aspargus and cheese
 
-console.log(...str); //S u b a r n a b
-console.log("s", "u", "b"); //s u b
-
-/////////////////////
-// Multiple values separated by a comma are usually only expected when we pass arguments into a function, or when we build a new array.
-////////////////////
+// With Spread Operator
+restaurant.orderPasta(...ingredients);
+// CONSOLE: Here is your declicious pasta with mushrooms, aspargus and cheese
