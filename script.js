@@ -1,16 +1,7 @@
 "use strict";
 
-/////////////////////////////////
-/////////////////////////////////
-const arr = [2, 3, 4];
-
-// Destructuring/ Unpacking an Array
-const [x, y, z] = arr;
-console.log(x, y); //2 3
-
 ///////////////////////////////
-///////////////////////////////
-
+//////// Destructuring Objects
 const restaurant = {
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
@@ -18,60 +9,74 @@ const restaurant = {
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
 
-  order: function (starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
   },
 };
 
-///////////---------------------
-// Destructuring
-let [m, n] = restaurant.categories;
-console.log(m, n); //Italian Pizzeria
+const { name, openingHours, categories } = restaurant;
+console.log(name);
+console.log(openingHours);
+console.log(categories);
 
-// Choosing first and third element (skipping second)
-let [o, , p] = restaurant.starterMenu;
-console.log(o, p); //Focaccia Garlic Bread
+//=============================
 
-///////////----------------------
-// Switching Variables (Traditional Way)
-const temp = o;
-o = p;
-p = temp;
-console.log(o, p); //Garlic Bread Focaccia
+//variable names to be different from the property names
+const {
+  name: resturantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
 
-// Switching Variables with Destructuring
-[m, n] = [n, m];
-console.log(m, n); //Pizzeria Italian
+console.log(resturantName); //Classico Italiano
 
-////////////------------------------
-console.log(restaurant.order(1, 2));
-//CONSOLE: [ 'Bruschetta', 'Risotto' ]
+console.log(hours);
+// //CONSOLE:
+// {
+//     thu: { open: 12, close: 22 },
+//     fri: { open: 11, close: 23 },
+//     sat: { open: 0, close: 24 }
+//   }
 
-// Receive 2 return values from a Function
-const [starter, main] = restaurant.order(1, 2);
-console.log(starter, main); //Bruschetta Risotto
+console.log(tags);
+//CONSOLE: [ 'Italian', 'Pizzeria', 'Vegetarian', 'Organic' ]
 
-/////////////////////////////
-/////////////////////////////
+//=============================
 
-// Nested Destructuring
-const nested = [1, 2, [3, 4, 5]];
-const [j, , [k, , l]] = nested;
-console.log(j, k, l); //1 3 5
+// Setting Default value to variables
 
-////////////////////////////
-////////////////////////////
+const { menu = [], starterMenu: starters = [] } = restaurant;
 
-// Setting Default Values during Destructuring
+console.log(menu); //[]
 
-let [s, t, u, v] = [8, 9, 10];
-console.log(s, t, u, v); //8 9 10 undefined
+console.log(starters);
+//CONSOLE: [ 'Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad' ]
 
-[s = 0, t = 0, u = 0, v = 0] = [8, 9, 10];
-console.log(s, t, u, v); //8 9 10 0
+////////============================
 
-[s = 0, t = 0, u = 0, v = 0] = [8, 9];
-console.log(s, t, u, v); //8 9 0 0
+// Mutating Variables
+let a = 111;
+let b = 222;
+const obj = { a: 21, b: 29, c: 99 };
 
-[s = 0, , u = 0, v = 0] = [8, 9, 10];
-console.log(s, u, v); //8 10 0
+/*
+{a,b} = obj
+console.log(a,b); //SyntaxError: Unexpected token '='
+
+REASON☝🏻: When we start a line with a curly brace like above, then JavaScript expects a code block. And since we cannot assign anything to a code block, we get this error.
+*/
+
+// Correct Way
+({ a, b } = obj);
+console.log(a, b); //21 29
