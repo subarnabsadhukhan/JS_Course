@@ -7,7 +7,7 @@
 
 const rest1 = {
   name: "Capri",
-  numGuests: 0,
+  numGuests: 20,
 };
 const rest2 = {
   name: "La Piazza",
@@ -15,15 +15,19 @@ const rest2 = {
 };
 
 ///////////------------------
-/////Logical Nullish Coalescing assignment Operator
+// rest1.owner = rest1.owner && "<ANONYMOUS>";
+// rest2.owner = rest2.owner && "<ANONYMOUS>";
 
-// This operator assigns a variable to a variable if that variable is currently nullish.
-rest1.numGuests ??= 10;
-rest2.numGuests ??= 10;
+/////Logical AND assignment Operator
 
-console.log(rest1); //{ name: 'Capri', numGuests: 0 }
+//Basically, what the logical and assignment operator does is to assign a value to a variable if it is currently truthy.
+
+rest1.owner &&= "<ANONYMOUS>";
+rest2.owner &&= "<ANONYMOUS>";
+
+console.log(rest1); //{ name: 'Capri', numGuests: 20 }
 
 console.log(rest2);
-//CONSOLE: { name: 'La Piazza', owner: 'Giovanni Rossi', numGuests: 10 }
+//CONSOLE: { name: 'La Piazza', owner: '<ANONYMOUS>' }
 
 ////////////---------------------
