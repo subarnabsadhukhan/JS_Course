@@ -1,62 +1,27 @@
 "use strict";
 
-/////////////////////////////////////
-/////// Short Circuiting (&& and ||)
+/////////////////////////////////////////////
+/////// The Nullish Coalescing Operator (??)
 
-//////////
-// Short Circuiting Happening...
-console.log(3 || "Jonas"); //3
-console.log("" || "Jonas"); //Jonas
-console.log(true || 0); //true
+// The nullish coalescing operator works with the idea or with the concept of nullish values instead of falsy values.
 
-///////////
-// Short Circuiting NOT happening...
-console.log(undefined || null); //null
-console.log(0 || null); //null
-////// though null☝🏻 is falsy value.
+// Nullish: null and undefinded (NOT 0 or '')
 
-/////////
-console.log(undefined || 0 || "" || "hello" || null); //hello
-
-/////////////////////////////////
-////////////////////////////////
-let arr = "";
-const ternary = arr ? arr : 1001;
-console.log(ternary); //1001
-
-// Using Short Circuiting...
-
-let sc = arr || 1001;
-console.log(sc); //1001
-
-arr = "Subarnab";
-sc = arr || 1001;
-console.log(sc); //Subarnab
-
-///////////////////////////////////
-///////////////////////////////////
-//The AND operator short circuits, when the first value is falsy. And then immediately returns that falsy value without even evaluating the second operand.
-/////////////////////
-
-console.log(0 && "Jonas"); //0
-console.log("Jonas" && 0); //0
-console.log(1 && 2); //2
-console.log("hello" && 23 && null && "Jonas"); //null
-
-///////////////////////////
 const restaurant = {
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
 };
 
-if (restaurant.name) {
-  console.log(restaurant.name); //Classico Italiano
-}
+restaurant.numGuests = 0;
 
-if (restaurant.founder) {
-  console.log(restaurant.founder); //
-}
+const guests = restaurant.numGuests || 10;
+console.log(guests); //10
 
-// Alternate to IF Statement
-console.log(restaurant.name && restaurant.name); //Classico Italiano
-console.log(restaurant.founder && restaurant.founder); //undefined
+const correctGuests = restaurant.numGuests ?? 10;
+console.log(correctGuests); //0
+// Here, 0 is not falsy value.
+
+///////////////////////////
+console.log(null ?? "Jonas"); //Jonas
+console.log(0 ?? null); //0
+console.log(0 ?? 1); //0
