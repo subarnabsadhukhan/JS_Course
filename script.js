@@ -1,28 +1,45 @@
 "use strict";
 
 ////////////////////////////////
-//// Pasta Resturant
+// Since ES 2018, the spread operator actually also works on objects, even though objects are not iterables.
+///////////////////////////////
+
 const restaurant = {
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
-
-  orderPasta(ing1, ing2, ing3) {
-    console.log(
-      `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
-    );
-  },
 };
-const ingredients = [
-  prompt(`Let's Make Pasta! Ingredient 1?`),
-  prompt(`Ingredient 2?`),
-  prompt(`Ingredient 3?`),
-];
-console.log(ingredients); //['mushrooms', 'aspargus', 'cheese']
 
-// Older Way
-restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
-//CONSOLE: Here is your declicious pasta with mushrooms, aspargus and cheese
+// Spread Operator on Object
+const updateRestaurant = { founder: "jonas", ...restaurant, foundIn: 1998 };
+console.log(updateRestaurant);
+/*
+CONSOLE:
+{
+  founder: 'jonas',
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  foundIn: 1998
+} 
+*/
 
-// With Spread Operator
-restaurant.orderPasta(...ingredients);
-// CONSOLE: Here is your declicious pasta with mushrooms, aspargus and cheese
+// Creating Shallow Copy of Opjects using Spread Operators
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = "Ristorante Roma";
+
+console.log(restaurantCopy);
+/*
+CONSOLE:
+{
+  name: 'Ristorante Roma',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy'
+} 
+*/
+
+console.log(restaurant);
+/* 
+CONSOLE:
+{
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy'
+}
+*/
