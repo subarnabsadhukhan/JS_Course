@@ -1,52 +1,80 @@
 "use strict";
 
 ////////////////////////////////////////
-/////// Looping Arrays: The for-of Loop
-// we can still use the continue and break keywords in for-of loop.
+/////// Enhanced Object Literals
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
 
-const arr = ["a", "b", "c", "d", "e", "f", "g", "h"];
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
 
-for (const item of arr) console.log(item);
-//CONSOLE:
-// a
-// b
-// c
-// d
-// e
-// f
-// g
-// h
+  /////////////////////////////////////
+  //////Bringing openingHours object to restaurant
+  ///////////// ENHANCEMENT 1:
 
-//////////////////////
-for (const item of arr.entries()) console.log(item);
-//CONSOLE:
-// [ 0, 'a' ]
-// [ 1, 'b' ]
-// [ 2, 'c' ]
-// [ 3, 'd' ]
-// [ 4, 'e' ]
-// [ 5, 'f' ]
-// [ 6, 'g' ]
-// [ 7, 'h' ]
+  /*
+  // Before ES6 Era
+  openingHours: openingHours,
+  */
 
-//////////////////////
+  // After ES6: New Method
+  openingHours,
+  ///////////////////////////////////////
+  ///////////// ENHANCEMENT 2: writng methods easily
 
-console.log(...arr.entries());
-// CONSOLE: [ 0, 'a' ] [ 1, 'b' ] [ 2, 'c' ] [ 3, 'd' ] [ 4, 'e' ] [ 5, 'f' ] [ 6, 'g' ] [ 7, 'h' ]
+  /*
+  // Before ES6 Era
+  delivery: function () {
+    console.log(`Order Delivered`);
+  },
+  */
+  // After ES6
+  delivery() {
+    console.log(`Order Delivered`);
+  },
+};
 
-///////////////////////////
+restaurant.delivery(); //Order Delivered
 
-const names = ["Subarnab", "Rana", "Diptendu", "Amartya", "Ankush", "Soujit"];
+/////////////////////////////////////////
+///////////// ENHANCEMENT 3: We can now actually compute/calculate property names. Instead of having to write them out manually and literally.
 
-for (const item of names.entries()) console.log(`${item[0] + 1}: ${item[1]}`);
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+// Computing Property names
+const hours = {
+  [days[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [days[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [`${days[4 + 1]}`]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+console.log(hours);
 
-//Alternate Way using Destructuring
-for (const [i, el] of names.entries()) console.log(`${i + 1}: ${el}`);
-
-// // CONSOLE
-// 1: Subarnab
-// 2: Rana
-// 3: Diptendu
-// 4: Amartya
-// 5: Ankush
-// 6: Soujit
+/* 
+CONSOLE:
+{
+  thu: { open: 12, close: 22 },
+  fri: { open: 11, close: 23 },
+  sat: { open: 0, close: 24 }
+}
+*/
