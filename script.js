@@ -1,85 +1,62 @@
 "use strict";
 
+/////////////////////////////////////
+/////// Short Circuiting (&& and ||)
+
+//////////
+// Short Circuiting Happening...
+console.log(3 || "Jonas"); //3
+console.log("" || "Jonas"); //Jonas
+console.log(true || 0); //true
+
+///////////
+// Short Circuiting NOT happening...
+console.log(undefined || null); //null
+console.log(0 || null); //null
+////// though null☝🏻 is falsy value.
+
+/////////
+console.log(undefined || 0 || "" || "hello" || null); //hello
+
 /////////////////////////////////
-////Rest Pattern and Parameters
+////////////////////////////////
+let arr = "";
+const ternary = arr ? arr : 1001;
+console.log(ternary); //1001
 
-// SPREAD, because on RIGHT side of =
-const arr = [1, 2, ...[3, 4, 5]];
-console.log(arr); //[ 1, 2, 3, 4, 5 ]
+// Using Short Circuiting...
 
-// REST Syntax, because LEFT side of =
-const [a, , b, ...others] = [1, 2, 3, 4, 5];
+let sc = arr || 1001;
+console.log(sc); //1001
 
-console.log(a, b); //1 3
+arr = "Subarnab";
+sc = arr || 1001;
+console.log(sc); //Subarnab
 
-//rest pattern basically collects the elements that are unused in the destructuring assignment.
+///////////////////////////////////
+///////////////////////////////////
+//The AND operator short circuits, when the first value is falsy. And then immediately returns that falsy value without even evaluating the second operand.
+/////////////////////
 
-console.log(others); //[ 4, 5 ]
-// rest syntax collects all the elements after the last variable. So it does not include any skipped elements.
+console.log(0 && "Jonas"); //0
+console.log("Jonas" && 0); //0
+console.log(1 && 2); //2
+console.log("hello" && 23 && null && "Jonas"); //null
 
-//////////////////////////////////////////////////
-////SyntaxError: Rest element must be last element
-// const [m,n, ...other1, o] =[1,2,3,4,5]
-
-//there can only ever be one rest in any destructuring assignment.
-//////////////////////////////////////////////////
-
+///////////////////////////
 const restaurant = {
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
-  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
-  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
-  mainMenu: ["Pizza", "Pasta", "Risotto"],
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
 };
 
-// REST operator in Object
-const { sat, ...weekdays } = restaurant.openingHours;
+if (restaurant.name) {
+  console.log(restaurant.name); //Classico Italiano
+}
 
-console.log(weekdays);
-//CONSOLE: { thu: { open: 12, close: 22 }, fri: { open: 11, close: 23 } }
+if (restaurant.founder) {
+  console.log(restaurant.founder); //
+}
 
-//////////////////////////////////////////
-//////////////////////////////////////////
-// REST Operator in Functions
-const add = function (...numbers) {
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    sum += numbers[i];
-  }
-  console.log(sum);
-};
-add(2, 3); //5
-add(5, 2, 7, 8); //22
-
-const x = [1, 2, 3, 4, 5, 6];
-add(...x); //21
-
-////////////////////////////////////////
-//// Pasta Restaurant
-const newRestaurant = {
-  name: "Classico Italiano",
-  location: "Via Angelo Tavanti 23, Firenze, Italy",
-
-  orderPizza: function (mainIngredient, ...otherIngredients) {
-    console.log(mainIngredient, otherIngredients);
-  },
-};
-newRestaurant.orderPizza("mushrooms"); //mushrooms []
-
-newRestaurant.orderPizza("mushrooms", "olives", "onion", "spinach");
-//CONSOLE: mushrooms [ 'olives', 'onion', 'spinach' ]
+// Alternate to IF Statement
+console.log(restaurant.name && restaurant.name); //Classico Italiano
+console.log(restaurant.founder && restaurant.founder); //undefined
