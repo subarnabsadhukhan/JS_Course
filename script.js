@@ -1,27 +1,32 @@
 "use strict";
 
-/////////////////////////////////////////////
-/////// The Nullish Coalescing Operator (??)
+////////////////////////////////////////
+/////// Logical Assignment Operators
 
-// The nullish coalescing operator works with the idea or with the concept of nullish values instead of falsy values.
+//This Operator was introduced in ES2021
 
-// Nullish: null and undefinded (NOT 0 or '')
-
-const restaurant = {
-  name: "Classico Italiano",
-  location: "Via Angelo Tavanti 23, Firenze, Italy",
+const rest1 = {
+  name: "Capri",
+  numGuests: 20,
+};
+const rest2 = {
+  name: "La Piazza",
+  owner: "Giovanni Rossi",
 };
 
-restaurant.numGuests = 0;
+///////////------------------
+/////Logical OR assignment Operator
 
-const guests = restaurant.numGuests || 10;
-console.log(guests); //10
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
 
-const correctGuests = restaurant.numGuests ?? 10;
-console.log(correctGuests); //0
-// Here, 0 is not falsy value.
+////// This operator assigns a variable to a variable if that variable is currently falsy.
+rest1.numGuests ||= 10;
+rest2.numGuests ||= 10;
 
-///////////////////////////
-console.log(null ?? "Jonas"); //Jonas
-console.log(0 ?? null); //0
-console.log(0 ?? 1); //0
+console.log(rest1); //{ name: 'Capri', numGuests: 20 }
+
+console.log(rest2);
+//CONSOLE: { name: 'La Piazza', owner: 'Giovanni Rossi', numGuests: 10 }
+
+////////////---------------------
