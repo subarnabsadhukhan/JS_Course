@@ -1,33 +1,52 @@
 "use strict";
 
 ////////////////////////////////////////
-/////// Logical Assignment Operators
+/////// Looping Arrays: The for-of Loop
+// we can still use the continue and break keywords in for-of loop.
 
-//This Operator was introduced in ES2021
+const arr = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
-const rest1 = {
-  name: "Capri",
-  numGuests: 20,
-};
-const rest2 = {
-  name: "La Piazza",
-  owner: "Giovanni Rossi",
-};
+for (const item of arr) console.log(item);
+//CONSOLE:
+// a
+// b
+// c
+// d
+// e
+// f
+// g
+// h
 
-///////////------------------
-// rest1.owner = rest1.owner && "<ANONYMOUS>";
-// rest2.owner = rest2.owner && "<ANONYMOUS>";
+//////////////////////
+for (const item of arr.entries()) console.log(item);
+//CONSOLE:
+// [ 0, 'a' ]
+// [ 1, 'b' ]
+// [ 2, 'c' ]
+// [ 3, 'd' ]
+// [ 4, 'e' ]
+// [ 5, 'f' ]
+// [ 6, 'g' ]
+// [ 7, 'h' ]
 
-/////Logical AND assignment Operator
+//////////////////////
 
-//Basically, what the logical and assignment operator does is to assign a value to a variable if it is currently truthy.
+console.log(...arr.entries());
+// CONSOLE: [ 0, 'a' ] [ 1, 'b' ] [ 2, 'c' ] [ 3, 'd' ] [ 4, 'e' ] [ 5, 'f' ] [ 6, 'g' ] [ 7, 'h' ]
 
-rest1.owner &&= "<ANONYMOUS>";
-rest2.owner &&= "<ANONYMOUS>";
+///////////////////////////
 
-console.log(rest1); //{ name: 'Capri', numGuests: 20 }
+const names = ["Subarnab", "Rana", "Diptendu", "Amartya", "Ankush", "Soujit"];
 
-console.log(rest2);
-//CONSOLE: { name: 'La Piazza', owner: '<ANONYMOUS>' }
+for (const item of names.entries()) console.log(`${item[0] + 1}: ${item[1]}`);
 
-////////////---------------------
+//Alternate Way using Destructuring
+for (const [i, el] of names.entries()) console.log(`${i + 1}: ${el}`);
+
+// // CONSOLE
+// 1: Subarnab
+// 2: Rana
+// 3: Diptendu
+// 4: Amartya
+// 5: Ankush
+// 6: Soujit
