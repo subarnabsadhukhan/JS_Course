@@ -2,6 +2,7 @@
 
 ///////////////////////////////
 //////// Destructuring Objects
+
 const restaurant = {
   name: "Classico Italiano",
   location: "Via Angelo Tavanti 23, Firenze, Italy",
@@ -9,25 +10,26 @@ const restaurant = {
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+  orderDelivery: function ({ time, address, mainIndex = 0, starterIndex = 1 }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
   },
 };
 
-////// Nested Object Destructuring
-const {
-  fri: { open: openTime, close: closeTime },
-} = restaurant.openingHours;
+restaurant.orderDelivery({
+  time: "22:30",
+  address: "kolkata",
+  mainIndex: 2,
+  starterIndex: 1,
+});
+//CONSOLE: Order received! Bruschetta and Risotto will be delivered to kolkata at 22:30
 
-console.log(openTime, closeTime); //11 23
+restaurant.orderDelivery({
+  time: "22:30",
+  address: "kolkata",
+});
+//CONSOLE: Order received! Bruschetta and Pizza will be delivered to kolkata at 22:30
