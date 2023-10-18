@@ -1,88 +1,71 @@
 "use strict";
 
 ////////////////////////////////////////
-/////// Optional Chaining (?.)
+/////// Looping Objects: Object Keys, Values, and Entries
 
-// Introduced in ES2020
-
-const restaurant = {
-  name: "Classico Italiano",
-  location: "Via Angelo Tavanti 23, Firenze, Italy",
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
+const openingHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0, // Open 24 hours
+    close: 24,
   },
 };
 
-console.log(restaurant.openingHours.sat.open); //0
+///////////////////////
+// Creating an Array of Property Names of an Object
+const properties = Object.keys(openingHours);
+console.log(properties); //[ 'thu', 'fri', 'sat' ]
 
-// A property exists if it's not null and not undefined. So if it's zero or the empty string, then it still exists of course.
+////////////////////////
+// Looping over Property Names
+for (const day of Object.keys(openingHours)) console.log(day);
 
-/*
-console.log(restaurant.openingHours.mon.open);
-//TypeError: Cannot read properties of undefined (reading 'open')
-*/
-console.log(restaurant.openingHours.mon?.open); //undefined
+//CONSOLE:
+// thu
+// fri
+// sat
 
-/*
-console.log(restaurant.closingHours.mon?.open);
-//TypeError: Cannot read properties of undefined (reading 'mon')
-*/
-
-// With optional chaining, if a certain property does not exist, then undefined is returned immediately.
-
-//if restaurant.closingHours does not even exist, well, then the mon property will not even be read.
-console.log(restaurant.closingHours?.mon?.open); //undefined
-
-// Alternate long method using if block
-if (restaurant.closingHours && restaurant.closingHours.mon) {
-  console.log(restaurant.closingHours.mon.open);
-}
-
-//////////////////////////////
-/////////////////////////////
-
-const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-
-for (const day of days) {
-  //if we want to use a variable name as the property name, basically, we need to use the brackets notation.👇🏻
-  const close = restaurant.openingHours[day]?.close;
-  console.log(
-    `on ${day}, our restaurant ${
-      !restaurant.openingHours[day]?.close ? "is closed" : `closes at ${close}`
-    }.`
-  );
-}
+//////////////////////////
+// Creating an Array of Property values of an Object
+const values = Object.values(openingHours);
+console.log(values);
 
 /*
 CONSOLE:
-on mon, our restaurant is closed.
-on tue, our restaurant is closed.
-on wed, our restaurant is closed.
-on thu, our restaurant closes at 22.
-on fri, our restaurant closes at 23.
-on sat, our restaurant closes at 24.
-on sun, our restaurant is closed.
+[
+  { open: 12, close: 22 },
+  { open: 11, close: 23 },
+  { open: 0, close: 24 }
+]
 */
-/////////////////////////////////////////////
-// Check if Method exists or NOT
-console.log(restaurant.order?.(0, 1) ?? "Method Doesn't exist.");
-//CONSOLE:Method Doesn't exist.
+/////////////////////////
+// Creating an Array of Object key-values
+const entries = Object.entries(openingHours);
+console.log(entries);
+/* 
+CONSOLE:
+[
+  [ 'thu', { open: 12, close: 22 } ],
+  [ 'fri', { open: 11, close: 23 } ],
+  [ 'sat', { open: 0, close: 24 } ]
+]
+*/
 
-// Check if Array element exists
-const usersArray = [{ name: "Subarnab", email: "hello@subarnab.in" }];
-
-console.log(usersArray[0]?.name); //Subarnab
-console.log(usersArray[1]?.name); //undefined
-console.log(usersArray[1]?.name ?? `2nd User Don't Exist.`); //2nd User Don't Exist.
+/////////////////////////////////
+// Exercise
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}.`);
+}
+/*
+CONSOLE:
+On thu we open at 12 and close at 22.
+On fri we open at 11 and close at 23.
+On sat we open at 0 and close at 24.
+*/
