@@ -1,104 +1,74 @@
 "use strict";
 
-////////////////////////////////////////
-// Coding Challenge #2
+///////////////////////////////////
+// Sets
+//Sets and maps were introduced in ES6
 
-/* 
-Let's continue with our football betting app!
+// A set is basically just a collection of unique values. So that means, a set can never have any duplicates.
 
-1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
-2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
-3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
-      Odd of victory Bayern Munich: 1.33
-      Odd of draw: 3.25
-      Odd of victory Borrussia Dortmund: 6.5
-Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+// Set can of course hold mixed data types.
 
-BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
-      {
-        Gnarby: 1,
-        Hummels: 1,
-        Lewandowski: 2
-      }
+/////////////////////////////////////
+const orderSet = new Set([
+  "pasta",
+  "pizza",
+  "pasta",
+  "risotto",
+  "pasta",
+  "risotto",
+  "pizza",
+]);
 
-GOOD LUCK 😀
-*/
+console.log(orderSet); //Set(3) { 'pasta', 'pizza', 'risotto' }
 
-const game = {
-  team1: "Bayern Munich",
-  team2: "Borrussia Dortmund",
-  players: [
-    [
-      "Neuer",
-      "Pavard",
-      "Martinez",
-      "Alaba",
-      "Davies",
-      "Kimmich",
-      "Goretzka",
-      "Coman",
-      "Muller",
-      "Gnarby",
-      "Lewandowski",
-    ],
-    [
-      "Burki",
-      "Schulz",
-      "Hummels",
-      "Akanji",
-      "Hakimi",
-      "Weigl",
-      "Witsel",
-      "Hazard",
-      "Brandt",
-      "Sancho",
-      "Gotze",
-    ],
-  ],
-  score: "4:0",
-  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
-  date: "Nov 9th, 2037",
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// The order of elements in the set is irrelevant. In SET there are actually no Indexes.
 
-////////////1.
-for (const [i, player] of game.scored.entries()) {
-  console.log(`Goal ${i + 1}: ${player}`);
-}
-/* 
-CONSOLE:
-Goal 1: Lewandowski
-Goal 2: Gnarby
-Goal 3: Lewandowski
-Goal 4: Hummels
-*/
+// Strings are also iterable.
+console.log(new Set("Subarnab"));
+//CONSOLE: Set(6) { 'S', 'u', 'b', 'a', 'r', 'n' }
 
-////////////2.
-let sum = 0;
-const odds = Object.values(game.odds);
-for (const i of odds) sum += i;
+// To get the size/length of a Set
+console.log(orderSet.size); //3
 
-const average = sum / odds.length;
-console.log(average); //3.6933333333333334
+// Checking if a Certain element is in a SET
+console.log(orderSet.has("pizza")); //true
+console.log(orderSet.has("bread")); //false
 
-////////////3.
-for (const [team, i] of Object.entries(game.odds)) {
-  console.log(`Odd of ${game[team] ?? `draw`}: ${i}`);
-}
-/*
-CONSOLE:
-Odd of Bayern Munich: 1.33
-Odd of draw: 3.25
-Odd of Borrussia Dortmund: 6.5
-*/
+// Adding Elements to SET
+orderSet.add("garlic bread");
+orderSet.add("garlic bread"); // No Duplicate is going to add.
+orderSet.add("bread");
 
-////////////4.
-const scorers = {};
-for (const player of game.scored) {
-  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
-}
-console.log(scorers); //{ Lewandowski: 2, Gnarby: 1, Hummels: 1 }
+console.log(orderSet);
+//CONSOLE: { 'pasta', 'pizza', 'risotto', 'garlic bread', 'bread' }
+
+// Deleting Elements from SET
+orderSet.delete("bread");
+orderSet.delete("bread"); // Have not shown any error.
+orderSet.delete("risotto");
+
+console.log(orderSet); //) { 'pasta', 'pizza', 'garlic bread' }
+
+// Sets are iterable. So, looping is possible.
+for (const order of orderSet) console.log(order);
+//CONSOLE:
+// pasta
+// pizza
+// garlic bread
+
+// Example: The main use case of sets is actually to remove duplicate values of arrays.
+
+const staff = ["waiter", "chef", "waiter", "manager", "chef"];
+const staffUnique = new Set(staff);
+
+// SET to Array Conversion
+console.log([...staffUnique]); //[ 'waiter', 'chef', 'manager' ]
+
+// Counting How many Unique Letters in a String
+const myName = "Subarnab";
+console.log(new Set(myName).size); //6
+
+// Deleting all Elements from a SET
+orderSet.clear();
+
+console.log(orderSet); //Set(0) {}
