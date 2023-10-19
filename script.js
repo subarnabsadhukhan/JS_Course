@@ -1,74 +1,80 @@
 "use strict";
 
 ///////////////////////////////////
-// Sets
-//Sets and maps were introduced in ES6
+// Maps: Fundamentals
 
-// A set is basically just a collection of unique values. So that means, a set can never have any duplicates.
+//So, in objects, the keys are basically always strings. But in maps, we can have any type of key. It could even be objects, or arrays, or other maps.
 
-// Set can of course hold mixed data types.
+const restaurant = new Map();
 
-/////////////////////////////////////
-const orderSet = new Set([
-  "pasta",
-  "pizza",
-  "pasta",
-  "risotto",
-  "pasta",
-  "risotto",
-  "pizza",
-]);
+restaurant.set("name", "Classico Italiano");
+restaurant.set(1, "India");
 
-console.log(orderSet); //Set(3) { 'pasta', 'pizza', 'risotto' }
+// calling ☝🏻 the set method like this does not only update the map, but it also returns the map
 
-// The order of elements in the set is irrelevant. In SET there are actually no Indexes.
+console.log(restaurant.set(2, "Bangadesh"));
+/*
+CONSOLE:
+Map(3) {
+  'name' => 'Classico Italiano',
+  1 => 'India',
+  2 => 'Bangadesh'
+}
+*/
 
-// Strings are also iterable.
-console.log(new Set("Subarnab"));
-//CONSOLE: Set(6) { 'S', 'u', 'b', 'a', 'r', 'n' }
+// .set Chaining...
+restaurant
+  .set("categories", ["a", "b"])
+  .set("open", 11)
+  .set("close", 23)
+  .set(true, "We are Open :D");
 
-// To get the size/length of a Set
-console.log(orderSet.size); //3
+// Getting Elements from MAP
+//-------------- .get() --------------
+console.log(restaurant.get("name")); //Classico Italiano
+console.log(restaurant.get(true)); //We are Open :D
 
-// Checking if a Certain element is in a SET
-console.log(orderSet.has("pizza")); //true
-console.log(orderSet.has("bread")); //false
+// Checking if a MAP contains a certain key
+//--------------- .has() -----------
+console.log(restaurant.has("categories")); //true
+console.log(restaurant.has("location")); //false
 
-// Adding Elements to SET
-orderSet.add("garlic bread");
-orderSet.add("garlic bread"); // No Duplicate is going to add.
-orderSet.add("bread");
+// Delete Elements form a Map
+restaurant.delete(2);
+restaurant.delete(true);
 
-console.log(orderSet);
-//CONSOLE: { 'pasta', 'pizza', 'risotto', 'garlic bread', 'bread' }
+console.log(restaurant);
+/*
+CONSOLE:
+Map(5) {
+  'name' => 'Classico Italiano',
+  1 => 'India',
+  'categories' => [ 'a', 'b' ],
+  'open' => 11,
+  'close' => 23
+}
+*/
 
-// Deleting Elements from SET
-orderSet.delete("bread");
-orderSet.delete("bread"); // Have not shown any error.
-orderSet.delete("risotto");
+// SIZE of the MAP
+console.log(restaurant.size); //5
 
-console.log(orderSet); //) { 'pasta', 'pizza', 'garlic bread' }
+// Clearing a MAP
+restaurant.clear();
+console.log(restaurant); //Map(0) {}
 
-// Sets are iterable. So, looping is possible.
-for (const order of orderSet) console.log(order);
-//CONSOLE:
-// pasta
-// pizza
-// garlic bread
+////////////////////////
+// Use Array and Objects as MAP keys
 
-// Example: The main use case of sets is actually to remove duplicate values of arrays.
+const newMAP = new Map();
+newMAP.set([1, 2], "hello");
 
-const staff = ["waiter", "chef", "waiter", "manager", "chef"];
-const staffUnique = new Set(staff);
+console.log(newMAP); //Map(1) { [ 1, 2 ] => 'hello' }
 
-// SET to Array Conversion
-console.log([...staffUnique]); //[ 'waiter', 'chef', 'manager' ]
+console.log(newMAP.get([1, 2])); //undefined
+//REASON: those two arrays are actually not the same object in the heap. And, the key there is exactly that object.
 
-// Counting How many Unique Letters in a String
-const myName = "Subarnab";
-console.log(new Set(myName).size); //6
+const arr = [2, 3];
+newMAP.set(arr, "BYE");
+console.log(newMAP); //{ [ 1, 2 ] => 'hello', [ 2, 3 ] => 'BYE' }
 
-// Deleting all Elements from a SET
-orderSet.clear();
-
-console.log(orderSet); //Set(0) {}
+console.log(newMAP.get(arr)); //BYE
