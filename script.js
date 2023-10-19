@@ -1,87 +1,79 @@
 "use strict";
 
 ///////////////////////////////////
-// Coding Challenge #3
+////// Working With Strings
 
-/* 
-Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+const airline = "TAP Air Portugal";
+const plane = "A320";
 
-1. Create an array 'events' of the different game events that happened (no duplicates)
-2. After the game has finished, it was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
-3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
-4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
-      [FIRST HALF] 17: ⚽️ GOAL
+// Getting Character of a String at a Certain Position
+console.log(plane[1]); //3
 
-GOOD LUCK 😀
-*/
+console.log(plane[2]); //2
+console.log(typeof plane[2]); //string
 
-const gameEvents = new Map([
-  [17, "⚽️ GOAL"],
-  [36, "🔁 Substitution"],
-  [47, "⚽️ GOAL"],
-  [61, "🔁 Substitution"],
-  [64, "🔶 Yellow card"],
-  [69, "🔴 Red card"],
-  [70, "🔁 Substitution"],
-  [72, "🔁 Substitution"],
-  [76, "⚽️ GOAL"],
-  [80, "⚽️ GOAL"],
-  [92, "🔶 Yellow card"],
-]);
+console.log("B737"[0]); //B
 
-////1.
-const events = new Set();
-for (const [m, e] of gameEvents) events.add(e);
+// length of a String
+console.log(airline.length); //16
+console.log("Subarnab".length); //8
 
-console.log([...events]);
-//CONSOLE: [ '⚽️ GOAL', '🔁 Substitution', '🔶 Yellow card', '🔴 Red card' ]
+/////////////////////////
+///// String Methods
 
-// Alternate Answer
-const eventsA = [...new Set(gameEvents.values())];
-console.log(eventsA);
+///----------- .indexOf() ---------
+// Gives the First occurrence
+console.log(airline.indexOf("a")); //14
+console.log(airline.indexOf("A")); //1
 
-////2.
-gameEvents.delete(64);
-console.log(gameEvents);
+// To Find the Last Occurrence - .lastIndexOf()
+console.log(airline.lastIndexOf("A")); //4
 
-////3.
-const totalGameMinutes = 90;
-const noOfEvents = [...gameEvents.keys()].length;
-console.log(
-  `An event happened, on average, every ${
-    totalGameMinutes / noOfEvents
-  } minutes`
-); //An event happened, on average, every 9 minutes
+// Occurrence of a Word
+console.log(airline.indexOf("Air")); //4
+console.log(airline.indexOf("air")); //-1 (Not Found)
 
-// Alternate Way
-console.log(
-  `An event happened, on average, every ${90 / gameEvents.size} minutes`
-);
+//----------- .slice() method ------------
 
-////4.
-for (const [key, events] of gameEvents) {
-  if (key <= 45) {
-    console.log(`[FIRST HALF] ${key}: ${events}`);
+// .slice(<beginningIndex>, <endingIndex>)
+console.log(airline.slice(4)); //Air Portugal
+
+console.log(airline.slice(4, 9)); //Air P
+// ending Index is not Included
+
+////////////////////////////
+// Extracting First Word of a Certain String
+console.log(airline.slice(0, airline.indexOf(" "))); //TAP
+
+// Extracting Last Word of a Certain String
+console.log(airline.slice(airline.lastIndexOf(" ") + 1)); //Portugal
+
+// Giving Negative Index starts extracting from the END
+console.log(airline.slice(-4)); //ugal
+console.log(airline.slice(4, -4)); //Air Port
+console.log(airline.slice(-4, 4)); //
+
+//////////////////////////////////
+// Checking if a seat is Middle Seat in Aeroplane
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === "B" || s === "E") {
+    console.log("You got the middle seat 🥲");
   } else {
-    console.log(`[SECOND HALF] ${key}: ${events}`);
+    console.log("You are Lucky 😎");
   }
-}
-/*
-CONSOLE:
-[FIRST HALF] 17: ⚽️ GOAL
-[FIRST HALF] 36: 🔁 Substitution
-[SECOND HALF] 47: ⚽️ GOAL
-[SECOND HALF] 61: 🔁 Substitution
-[SECOND HALF] 69: 🔴 Red card
-[SECOND HALF] 70: 🔁 Substitution
-[SECOND HALF] 72: 🔁 Substitution
-[SECOND HALF] 76: ⚽️ GOAL
-[SECOND HALF] 80: ⚽️ GOAL
-[SECOND HALF] 92: 🔶 Yellow card
-*/
+};
 
-// Alternate Way
-for (const [min, event] of gameEvents) {
-  const half = min <= 45 ? "FIRST" : "SECOND";
-  console.log(`[${half} HALF] ${min}: ${event}`);
-}
+checkMiddleSeat("11B"); //You got the middle seat 🥲
+checkMiddleSeat("23E"); //You got the middle seat 🥲
+checkMiddleSeat("5F"); //You are Lucky 😎
+
+///////////////////////////////////
+// Why methods on String actually works??
+// Whenever we call a method on a string, JavaScript will automatically behind the scenes convert that string primitive to a string object with the same content. And then it's on that object where the methods are called.
+// This process is called boxing because it basically takes our string and puts it into a box which is the object.
+console.log(typeof new String("Subarnab")); //object
+
+// All string methods return primitives. Even if called on a string object.
+console.log(typeof new String("Subarnab").slice(4)); //string
