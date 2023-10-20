@@ -1,78 +1,87 @@
 "use strict";
 
-const airline = "TAP Air Portugal";
+//--------------- .split() ------------
+// Split allows us to split a string into multiple parts based on a divider string.
 
-// Changing Case of String
-console.log(airline.toLowerCase()); //tap air portugal
-console.log(airline.toUpperCase()); //TAP AIR PORTUGAL
-console.log("Subarnab".toUpperCase()); //SUBARNAB
+console.log("a+very+good+boy".split("+"));
+//CONSOLE: [ 'a', 'very', 'good', 'boy' ]
+console.log("Subarnab Sadhukhan".split(" ")); //[ 'Subarnab', 'Sadhukhan' ]
 
-// Fix Capitalization in Name
-const passenger = "sUBarNaB";
+const [firstName, lastName] = "Subarnab Sadhukhan".split(" ");
+console.log(firstName, lastName); //Subarnab Sadhukhan
 
-const passengerLower = passenger.toLowerCase();
-const passengerCorrect =
-  passengerLower[0].toUpperCase() + passengerLower.slice(1);
-console.log(passengerCorrect); //Subarnab
+// ----------- .join() ----------------
+const updatedName = ["Mr.", firstName.toUpperCase(), lastName].join(" ");
+console.log(updatedName); //Mr. SUBARNAB Sadhukhan
 
-/////////////////////////////////////////
-//--------- .trim() ------------------
-const str = "   hello    ";
-console.log(str.length); //12
+////////////////////////////////////
+//Exercise: Capitalize a name
+const capitalizeName = function (fullName) {
+  const nameWords = fullName.split(" ");
+  const correctName = [];
+  for (const word of nameWords) {
+    const UpperCasedWord = word.slice(0, 1).toUpperCase() + word.slice(1);
+    correctName.push(UpperCasedWord);
+  }
+  return correctName.join(" ");
+};
 
-console.log(str.trim()); //hello
-console.log(str.trim().length); //5
+console.log(capitalizeName("jessica ann smith davis")); //Jessica Ann Smith Davis
 
-console.log(str.trimStart()); //hello
-console.log(str.trimStart().length); //9
+console.log(capitalizeName("subarnab sadhukhan")); //Subarnab Sadhukhan
 
-console.log(str.trimEnd()); //   hello
-console.log(str.trimEnd().length); //8
+console.log(capitalizeName("ishita ghosh sadhukhan")); //Ishita Ghosh Sadhukhan
 
-// Only starting and Ending spaces are trimmed.
-const greet = "   hello baby   ";
-console.log(greet.trim()); //hello baby
+///// Alternate Approach with .replace()
+const CapiMac = function (names) {
+  const nameWords = fullName.split(" ");
+  const correctName = [];
+  for (const word of nameWords) {
+    correctName.push(replace(word[0], word[0].toUpperCase()));
+  }
+  return correctName;
+};
+console.log(capitalizeName("jessica ann smith davis")); //Jessica Ann Smith Davis
 
-/////////////////////////////
-// Comparing Emails
-const corrEmail = "hello@jonas.io";
-const loginEmail = "   Hello@jonas.Io \n";
+console.log(capitalizeName("subarnab sadhukhan")); //Subarnab Sadhukhan
 
-const normalizeEmail = loginEmail.toLowerCase().trim();
-console.log(normalizeEmail); //hello@jonas.io
+console.log(capitalizeName("ishita ghosh sadhukhan")); //Ishita Ghosh Sadhukhan
 
-console.log(corrEmail === normalizeEmail); //true
+//////////////////////////////
+// Padding a String
+// Padding a string means to add a number of characters to the string until the string has a certain desired length.
 
-///////////////////////////////////
-//-------- .replace() -----------
-const yourName = "What is your name? tell me your name";
-console.log(yourName.replace("your", "my"));
-//CONSOLE: What is my name? tell me your name.
-// Look, only the first instance is replaced. ☝🏻
+//---------- .padStart() ------------
+const message = "Go to gate 23!";
+console.log(message.padStart(20, "*")); //******Go to gate 23!
+console.log(message.padStart(20, "*").length); //20
 
-// To replace all the instances of a word, use .replaceAll()
-console.log(yourName.replaceAll("your", "my"));
-//CONSOLE: What is my name? tell me my name
+//----------- .padEnd() -------------
+console.log("subarnab".padEnd(10, "#")); //subarnab##
+console.log("subarnab".padEnd(10, "#").length); //10
 
-// Use REGEX alternative to .replaceAll()
-console.log(yourName.replace(/your/g, "my"));
-//CONSOLE: What is my name? tell me my name
+/////////////////////////////////
+//// Exercise: Mask Credit Card
 
-/////////////////////////////
-// Replacing Parts of String
-const priceGB = "288,97$";
-const priceInd = priceGB.replace(",", ".").replace("$", "₹");
-console.log(priceInd); //288.97₹
+const maskCreditCard = function (num) {
+  const str = num + "";
+  const last = str.slice(-4);
+  console.log(last.padStart(str.length, "*"));
+};
+maskCreditCard(274541584725); //********4725
+maskCreditCard("274541584725"); //********4725
+maskCreditCard(147848485252); //********5252
 
-///////////////////////////////
-// Booleans
-// ---------- .includes() ------------
-const plane = "A320neo";
-console.log(plane.includes(320)); //true
-console.log(plane.includes("320")); //true
+/////////////////////////////////
 
-// ---------- .startsWith() ------------
-console.log(plane.startsWith("A3")); //true
-console.log(plane.startsWith("neo")); //false
-// ---------- .endsWith() ------------
-console.log(plane.endsWith("neo")); //true
+//---------- .repeat() -----------
+console.log("Subarnab ".repeat(5));
+//CONSOLE: Subarnab Subarnab Subarnab Subarnab Subarnab
+
+////////////////////////////
+// Exercise:
+const planeInLine = function (n) {
+  console.log(`There are ${n} planes in line ${"✈️".repeat(n)}`);
+};
+planeInLine(5); //There are 5 planes in line ✈️✈️✈️✈️✈️
+planeInLine(3); //There are 3 planes in line ✈️✈️✈️
