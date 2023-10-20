@@ -1,79 +1,78 @@
 "use strict";
 
-///////////////////////////////////
-////// Working With Strings
-
 const airline = "TAP Air Portugal";
-const plane = "A320";
 
-// Getting Character of a String at a Certain Position
-console.log(plane[1]); //3
+// Changing Case of String
+console.log(airline.toLowerCase()); //tap air portugal
+console.log(airline.toUpperCase()); //TAP AIR PORTUGAL
+console.log("Subarnab".toUpperCase()); //SUBARNAB
 
-console.log(plane[2]); //2
-console.log(typeof plane[2]); //string
+// Fix Capitalization in Name
+const passenger = "sUBarNaB";
 
-console.log("B737"[0]); //B
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect); //Subarnab
 
-// length of a String
-console.log(airline.length); //16
-console.log("Subarnab".length); //8
+/////////////////////////////////////////
+//--------- .trim() ------------------
+const str = "   hello    ";
+console.log(str.length); //12
 
-/////////////////////////
-///// String Methods
+console.log(str.trim()); //hello
+console.log(str.trim().length); //5
 
-///----------- .indexOf() ---------
-// Gives the First occurrence
-console.log(airline.indexOf("a")); //14
-console.log(airline.indexOf("A")); //1
+console.log(str.trimStart()); //hello
+console.log(str.trimStart().length); //9
 
-// To Find the Last Occurrence - .lastIndexOf()
-console.log(airline.lastIndexOf("A")); //4
+console.log(str.trimEnd()); //   hello
+console.log(str.trimEnd().length); //8
 
-// Occurrence of a Word
-console.log(airline.indexOf("Air")); //4
-console.log(airline.indexOf("air")); //-1 (Not Found)
+// Only starting and Ending spaces are trimmed.
+const greet = "   hello baby   ";
+console.log(greet.trim()); //hello baby
 
-//----------- .slice() method ------------
+/////////////////////////////
+// Comparing Emails
+const corrEmail = "hello@jonas.io";
+const loginEmail = "   Hello@jonas.Io \n";
 
-// .slice(<beginningIndex>, <endingIndex>)
-console.log(airline.slice(4)); //Air Portugal
+const normalizeEmail = loginEmail.toLowerCase().trim();
+console.log(normalizeEmail); //hello@jonas.io
 
-console.log(airline.slice(4, 9)); //Air P
-// ending Index is not Included
-
-////////////////////////////
-// Extracting First Word of a Certain String
-console.log(airline.slice(0, airline.indexOf(" "))); //TAP
-
-// Extracting Last Word of a Certain String
-console.log(airline.slice(airline.lastIndexOf(" ") + 1)); //Portugal
-
-// Giving Negative Index starts extracting from the END
-console.log(airline.slice(-4)); //ugal
-console.log(airline.slice(4, -4)); //Air Port
-console.log(airline.slice(-4, 4)); //
-
-//////////////////////////////////
-// Checking if a seat is Middle Seat in Aeroplane
-const checkMiddleSeat = function (seat) {
-  // B and E are middle seats
-  const s = seat.slice(-1);
-  if (s === "B" || s === "E") {
-    console.log("You got the middle seat 🥲");
-  } else {
-    console.log("You are Lucky 😎");
-  }
-};
-
-checkMiddleSeat("11B"); //You got the middle seat 🥲
-checkMiddleSeat("23E"); //You got the middle seat 🥲
-checkMiddleSeat("5F"); //You are Lucky 😎
+console.log(corrEmail === normalizeEmail); //true
 
 ///////////////////////////////////
-// Why methods on String actually works??
-// Whenever we call a method on a string, JavaScript will automatically behind the scenes convert that string primitive to a string object with the same content. And then it's on that object where the methods are called.
-// This process is called boxing because it basically takes our string and puts it into a box which is the object.
-console.log(typeof new String("Subarnab")); //object
+//-------- .replace() -----------
+const yourName = "What is your name? tell me your name";
+console.log(yourName.replace("your", "my"));
+//CONSOLE: What is my name? tell me your name.
+// Look, only the first instance is replaced. ☝🏻
 
-// All string methods return primitives. Even if called on a string object.
-console.log(typeof new String("Subarnab").slice(4)); //string
+// To replace all the instances of a word, use .replaceAll()
+console.log(yourName.replaceAll("your", "my"));
+//CONSOLE: What is my name? tell me my name
+
+// Use REGEX alternative to .replaceAll()
+console.log(yourName.replace(/your/g, "my"));
+//CONSOLE: What is my name? tell me my name
+
+/////////////////////////////
+// Replacing Parts of String
+const priceGB = "288,97$";
+const priceInd = priceGB.replace(",", ".").replace("$", "₹");
+console.log(priceInd); //288.97₹
+
+///////////////////////////////
+// Booleans
+// ---------- .includes() ------------
+const plane = "A320neo";
+console.log(plane.includes(320)); //true
+console.log(plane.includes("320")); //true
+
+// ---------- .startsWith() ------------
+console.log(plane.startsWith("A3")); //true
+console.log(plane.startsWith("neo")); //false
+// ---------- .endsWith() ------------
+console.log(plane.endsWith("neo")); //true
