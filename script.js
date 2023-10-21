@@ -1,38 +1,22 @@
 "use strict";
 
 ///////////////////////////////////
-// Functions Accepting Callback Functions
-const oneWord = function (str) {
-  return str.replace(/ /g, "").toLowerCase();
+// Functions Returning Functions
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
 };
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(" ");
-  return [first.toUpperCase(), ...others].join(" ");
-};
+const greeterHey = greet("Hey");
+greeterHey("Jonas");
+greeterHey("Steven");
 
-// Higher-order function
-const transformer = function (str, fn) {
-  console.log(`Original string: ${str}`);
-  console.log(`Transformed string: ${fn(str)}`);
+greet("Hello")("Jonas");
 
-  console.log(`Transformed by: ${fn.name}`);
-};
+//////////////////////////////////
+// Challenge: Write the Above Function with Arrow Function.
 
-transformer("JavaScript is the best!", upperFirstWord);
-//////////////////////// CallBack Function ☝🏻
-/*
-CONSOLE:
-Original string: JavaScript is the best!
-Transformed string: JAVASCRIPT is the best!
-Transformed by: upperFirstWord
-*/
+const greetA = (greeting) => (name) => console.log(`${greeting} ${name}`);
 
-transformer("JavaScript is the best!", oneWord);
-///////////////////// CallBack Function ☝🏻
-/*
-CONSOLE:
-Original string: JavaScript is the best!
-Transformed string: javascriptisthebest!
-Transformed by: oneWord
-*/
+greetA("Hi")("Ishita"); //Hi Ishita
