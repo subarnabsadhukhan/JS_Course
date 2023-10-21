@@ -1,7 +1,8 @@
 "use strict";
 
 ///////////////////////////////////
-// The call and apply Methods
+// The Bind Method
+// .bind() also allows us to manually set this keywords for any function call. Now, the difference is that bind does not immediately call the function. Instead it returns a new function where this keyword is bound.
 
 const lufthansa = {
   airline: "Lufthansha",
@@ -17,63 +18,81 @@ const lufthansa = {
   },
 };
 
-lufthansa.book(239, "Subarnab Sadhukhan");
-//Subarnab Sadhukhan booked a seat on Lufthansha flight LH239
-
-lufthansa.book(635, "Rana Ghosh");
-//Rana Ghosh booked a seat on Lufthansha flight LH635
-
-console.log(lufthansa.bookings);
-/*
-[
-  { flight: 'LH239', name: 'Subarnab Sadhukhan' },
-  { flight: 'LH635', name: 'Rana Ghosh' }
-]
-*/
-
 const eurowings = {
   airline: "Eurowings",
   iataCode: "EW",
   bookings: [],
 };
+
 const book = lufthansa.book;
 
-// book(296, "Ajay"); //TypeError: Cannot read properties of undefined (reading 'airline'). Here, .this keyword is undefinded.
+const bookEW = book.bind(eurowings);
+const bookLW = book.bind(lufthansa);
+// It will not call the book function. Instead it will return a new function where this keyword will always be set to Eurowings.
 
-///////////////////////////
-///////////////////////////
-// How do we tell JavaScript explicitly or manually what this this keyword should look like?
+bookEW(23, "Riya Roy");
+//Riya Roy booked a seat on Eurowings flight EW23
 
-// .call() method
-book.call(eurowings, 23, "Sima Ghosh");
-//Sima Ghosh booked a seat on Eurowings flight EW23
+bookLW(555, "Sneha Nath");
+//Sneha Nath booked a seat on Lufthansha flight LH555
+
+///////////////////
+// presetting some arguments
+const bookEW555 = book.bind(eurowings, 555);
+
+bookEW555("Shreya Das"); // flightNum is already presetted.
+//Shreya Das booked a seat on Eurowings flight EW555
 
 console.log(eurowings.bookings);
-//[ { flight: 'EW23', name: 'Sima Ghosh' } ]
-
-book.call(lufthansa, 555, "Ishita Ghosh");
-//Ishita Ghosh booked a seat on Lufthansha flight LH555
-
-console.log(lufthansa.bookings);
 /*
 CONSOLE:
 [
-  { flight: 'LH239', name: 'Subarnab Sadhukhan' },
-  { flight: 'LH635', name: 'Rana Ghosh' },
-  { flight: 'LH555', name: 'Ishita Ghosh' }
+  { flight: 'EW23', name: 'Riya Roy' },
+  { flight: 'EW555', name: 'Shreya Das' }
 ]
 */
 
-//////////////////////////////
-/// .apply() method
-// .apply() method does basically exactly the same thing as .call(). The only difference is that apply does not receive a list of arguments after the this keyword, so it doesn't receive this list here but instead, it's gonna take an array of the arguments.
+/////////////////////////
+// .bind() method with Event Listeners
 
-const flightData = [555, "Riya Ghosh"];
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
 
-book.apply(lufthansa, flightData);
-//Riya Ghosh booked a seat on Lufthansha flight LH555
+  this.planes++;
+  console.log(this.planes);
+};
 
-///// This .apply() method is not that used anymore in modern JavaScript.
-// Better Method with Array
-book.call(lufthansa, ...flightData);
-//Riya Ghosh booked a seat on Lufthansha flight LH555
+/*
+document.querySelector(".buy").addEventListener("click", lufthansa.buyPlane);
+//CONSOLE:
+//<button class="buy">Buy new plane 🛩</button>
+//NaN
+
+// REASON:
+Here, lufthansa.buyPlane will not work. Because, in an event handler function, this keyword always points to the element on which that handler is attached to. Here, this keyword will point to the button element.
+*/
+
+document
+  .querySelector(".buy")
+  .addEventListener("click", lufthansa.buyPlane.bind(lufthansa));
+// We have to Explicitly definde the this keyword above ☝🏻
+
+//CONSOLE:
+//{airline: 'Lufthansha', iataCode: 'LH', bookings: Array(1), planes: 300, book: ƒ, …}
+//301
+
+/////////////////////////////////////
+///////////////////////////////////
+// Partial Application
+// In case of partial application, many times we are not even interested in this keyword.
+
+const addTax = (rate, value) => value + value * rate;
+
+console.log(addTax(0.1, 200)); //220
+
+// PRESET the VAT rate of 23%
+const addVAT = addTax.bind(null, 0.23);
+// first argument of .bind() is this keyword. We can write anything instead of null because there is no this keyword 🤣.
+
+console.log(addVAT(100)); //123
