@@ -1,38 +1,27 @@
 "use strict";
 
 ///////////////////////////////////
-/// Setting Default Parameters
-const bookings = [];
-
-const createBooking = function (
-  flightNum,
-  numPassengers = 1,
-  price = 10 * 2 * numPassengers
-) {
-  // Older Way of Setting Default Parameters
-  // ES5 Era
-  // numPassengers = numPassengers || 1;
-  // price = price || 199;
-
-  const booking = {
-    flightNum,
-    numPassengers,
-    price,
-  };
-  console.log(booking);
-  bookings.push(booking);
+// How Passing Arguments Works: Values vs. Reference
+const flight = "LH234";
+const jonas = {
+  name: "Jonas Schmedtmann",
+  passport: 24739479284,
 };
 
-createBooking("LH123");
-//CONSOLE: { flightNum: 'LH123', numPassengers: 1, price: 20 }
+const checkIn = function (flightNum, passenger) {
+  flightNum = "LH999";
+  passenger.name = "Mr. " + passenger.name;
+};
 
-createBooking("LH123", 5);
-//CONSOLE: { flightNum: 'LH123', numPassengers: 5, price: 100 }
+checkIn(flight, jonas);
+console.log(flight); //LH234
 
-////////////////////////////////////////
-///// We Can't Skip Parameters like below 👇🏻
-// createBooking("LH123", ,50);
+console.log(jonas);
+//{ name: 'Mr. Jonas Schmedtmann', passport: 24739479284 }
+//// WTF? ☝🏻
 
-//// There is a way to Skip Parameters 👇🏻
-createBooking("LH888", undefined, 5000);
-//CONSOLE: { flightNum: 'LH888', numPassengers: 1, price: 5000 }
+/*
+📌 JavaScript does not have `passing by reference`, only `passing by value`, even though it looks like it's passing by reference.
+
+So there are languages like C++, where you can pass a reference to any value, instead of the value itself. This works even with primitives.
+*/
