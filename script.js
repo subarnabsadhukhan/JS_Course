@@ -1,25 +1,25 @@
 "use strict";
 
 ///////////////////////////////////
-// Immediately Invoked Function Expressions (IIFE)
+// Closures
 
-// Sometimes in JavaScript, we need a function that is only executed once. And then never again. So basically a function that disappears right after it's called once.
+// We can say that a closure makes a function remember all the variables that existed at the function's birthplace.
 
-//However, we can still trick JavaScript into thinking that this is just an expression. And we do that by simply wrapping all of this into parentheses. 👇🏻
-(function () {
-  console.log(`This will Never run again!`);
-}); // This will Not Call The Function.
+// Any function always has access to the variable environment of the execution context in which the function was created.
 
-// To Call the Function-
-(function () {
-  console.log(`This will Never run again!`);
-})(); //This will Never run again!
+// The closure basically has priority over the scope chain.
 
-(() => console.log(`This will ALSO Never run again!`))();
-//CONSOLE: This will ALSO Never run again!
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+const booker = secureBooking();
+booker(); //1 passengers
+booker(); //2 passengers
 
-//////////////////////////
-{
-  const isPrivate = "hello";
-}
-// console.log(isPrivate); //ReferenceError: isPrivate is not defined
+console.dir(booker);
+
+// ƒ anonymous()length: 0name: ""prototype: {constructor: ƒ}arguments: (...)caller: (...)[[FunctionLocation]]: script.js:14[[Prototype]]: ƒ ()[[Scopes]]: Scopes[3]0: Closure (secureBooking) {passengerCount: 2}1: Script {secureBooking: ƒ, booker: ƒ}2: Global {0: Window, window: Window, self: Window, document: document, name: '', location: Location, …}
