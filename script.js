@@ -1,25 +1,61 @@
 "use strict";
 
 ///////////////////////////////////
-// Closures
+// More Closure Examples
 
-// We can say that a closure makes a function remember all the variables that existed at the function's birthplace.
+// We don't need to return a function from another function in order to create a closure.
 
-// Any function always has access to the variable environment of the execution context in which the function was created.
+////////////////////////
+// Example 1
+let f;
 
-// The closure basically has priority over the scope chain.
-
-const secureBooking = function () {
-  let passengerCount = 0;
-  return function () {
-    passengerCount++;
-    console.log(`${passengerCount} passengers`);
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
   };
 };
-const booker = secureBooking();
-booker(); //1 passengers
-booker(); //2 passengers
 
-console.dir(booker);
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
 
-// ƒ anonymous()length: 0name: ""prototype: {constructor: ƒ}arguments: (...)caller: (...)[[FunctionLocation]]: script.js:14[[Prototype]]: ƒ ()[[Scopes]]: Scopes[3]0: Closure (secureBooking) {passengerCount: 2}1: Script {secureBooking: ƒ, booker: ƒ}2: Global {0: Window, window: Window, self: Window, document: document, name: '', location: Location, …}
+g();
+f(); //46
+console.dir(f);
+
+// Re-assigning f function
+h();
+f(); //1554
+// Closure can change as the variable is reassigned.
+console.dir(f);
+
+///////////////////////////
+// Example 2
+// A timer is another great example that we don't need to return a function to see a closure in action.
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+// So, the only way in which this callback function here can have access to the variables that are defined in the board passengers function that has long finished execution is if it created a closure.
+
+const perGroup = 1000; // A closure even has priority over the scope chain.
+
+boardPassengers(180, 5);
+
+/*
+// CONSOLE:
+// Will start boarding in 5 seconds
+// We are now boarding all 180 passengers
+// There are 3 groups, each with 60 passengers
+*/
